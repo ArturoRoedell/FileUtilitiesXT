@@ -1,10 +1,32 @@
-namespace JsonUtilitiesSimple003.Tests;
+using FileUtilities;
+using FileUtilities.Types;
 
-public class UnitTest1
+
+namespace JsonUtilitiesSimple003;
+
+public class ConcatPathFileNameAndSuffixTests
 {
-    [Fact]
-    public void Test1()
-    {
-
-    }
+	public ConcatPathFileNameAndSuffixTests()
+	{
+		
+	}
+	
+	[Fact]
+	public void PutPathTotgether()
+	{
+		string path = @"C:\Users\ARTURO 001\source\repos\001ScratchCode";
+		string filename = "HighSocres";
+		string expected = @"C:\Users\ARTURO 001\source\repos\001ScratchCode\HighSocres.json";
+		string actual = FileUtilitiesBasic.ConcatPathFileNameAndSuffix(path, filename, ".json");
+		Assert.Equal(expected, actual);
+	}
 }
+
+
+// public class FileUtilitiesBasic
+// {
+// 	public void ShouldCheckIfFIleExistsThenCreateFile()
+// 	{
+// 		//FileUtilitiesBasic
+// 	}
+// }
