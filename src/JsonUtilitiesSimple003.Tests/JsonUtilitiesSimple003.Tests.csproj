@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JsonUtilitiesSimple003\JsonUtilitiesSimple003.csproj" />
+    <Reference Include="JsonUtilitiesSimple003_02">
+      <HintPath>..\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\bin\Debug\net6.0\JsonUtilitiesSimple003_02.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

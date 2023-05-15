@@ -1769,16 +1769,6 @@
         "build": {
           "build/netcoreapp3.1/xunit.runner.visualstudio.props": {}
         }
-      },
-      "JsonUtilitiesSimple003/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "compile": {
-          "bin/placeholder/JsonUtilitiesSimple003.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/JsonUtilitiesSimple003.dll": {}
-        }
       }
     }
   },
@@ -5673,16 +5663,10 @@
         "xunit.runner.visualstudio.2.4.5.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
-    },
-    "JsonUtilitiesSimple003/1.0.0": {
-      "type": "project",
-      "path": "../JsonUtilitiesSimple003/JsonUtilitiesSimple003.csproj",
-      "msbuildProject": "../JsonUtilitiesSimple003/JsonUtilitiesSimple003.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "JsonUtilitiesSimple003 >= 1.0.0",
       "MSTest.TestFramework >= 3.0.2",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
       "coverlet.collector >= 3.2.0",
@@ -5725,11 +5709,7 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {
-            "C:\\Users\\ARTURO 001\\source\\repos\\JsonUtilitiesSimple003\\src\\JsonUtilitiesSimple003\\JsonUtilitiesSimple003.csproj": {
-              "projectPath": "C:\\Users\\ARTURO 001\\source\\repos\\JsonUtilitiesSimple003\\src\\JsonUtilitiesSimple003\\JsonUtilitiesSimple003.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

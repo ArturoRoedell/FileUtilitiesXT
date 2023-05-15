@@ -1,0 +1,12 @@
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\bin\Debug\net6.0\JsonUtilitiesSimple003_02.deps.json
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\bin\Debug\net6.0\JsonUtilitiesSimple003_02.dll
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\bin\Debug\net6.0\JsonUtilitiesSimple003_02.pdb
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\JsonUtilitiesSimple003_02.csproj.AssemblyReference.cache
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\JsonUtilitiesSimple003_02.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\JsonUtilitiesSimple003_02.AssemblyInfoInputs.cache
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\JsonUtilitiesSimple003_02.AssemblyInfo.cs
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\JsonUtilitiesSimple003_02.csproj.CoreCompileInputs.cache
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\JsonUtilitiesSimple003_02.dll
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\refint\JsonUtilitiesSimple003_02.dll
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\JsonUtilitiesSimple003_02.pdb
+C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\obj\Debug\net6.0\ref\JsonUtilitiesSimple003_02.dll
