@@ -19,7 +19,6 @@ public class  selectionTools
 
 			if (ChoseDemoTest == "y" || ChoseDemoTest == "n" || ChoseDemoTest == "Y" || ChoseDemoTest == "N")
 			{
-				//select = Convert.ToInt32(ChoseDemoTest);
 				select = ChoseDemoTest;
 				loopMe = false;
 			}

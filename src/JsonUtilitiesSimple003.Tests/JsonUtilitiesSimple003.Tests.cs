@@ -9,7 +9,7 @@ using Microsoft.VisualBasic;
 using  static FileUtilities.FileUtilitiesBasic;
 
 
-namespace JsonUtilitiesSimple003;
+namespace JsonUtilitiesSimple003.Tests;
 
 public class FileUtilitiesBasicTest
 {
