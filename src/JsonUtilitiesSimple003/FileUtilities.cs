@@ -1,42 +1,50 @@
 using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Mime;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FileUtilities.Types;
 using static FileUtilities.FileUtilitiesBasic;
-using static FileUtilities.JsonUtilityBasics;
 
 /* TASKS:
 //TODO - Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
 //TODO - FEATURE: Append to List Class in filebasics
-//TODO - FEATURE: SORT List Class
+//TODO - FEATURE: Append to File
+// FEATURE: SORT List Class?? Maybe I dont Need Sort?
+*/
+
+/*NOTES ON USAGE:
+// It is convenient serialize from a list before you write to json file to avoid the issues with 
+// json comma separations and bracket begining and ending. In short dont use file append. Read file, deserialize, then
+// add data to list then, serialize, write file. 
 */
 
 namespace FileUtilities
 {
-	public class JsonUtilityBasics
+	public class FileUtilitiesBasic
 	{
-		public static List<T> JsonDeserializeDataReturnList<T>(CustomJsonFile<T> cjf)
+		public static List<T> DeserializeJsonStringReturnList<T>(string fileContent)
 		{
-			List<T> FileData = null;
-			string content = File.ReadAllText(cjf.PathFileNameAndSuffix);
+			List<T> FileDataList = null;
+			//string fileContent = File.ReadAllText(filePath);
 			try
 			{
-				FileData = JsonSerializer.Deserialize<List<T>>(content);
+				FileDataList = JsonSerializer.Deserialize<List<T>>(fileContent);
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine("Not A json file");
 			}
-			return FileData;
+			return FileDataList;
 		}
 
-		public static string JsonSerializeDataReturnString<T>(List<T> listData)
+		public static string SerializeJsonDataReturnString<T>(List<T> listData)
 		{
 			string jsonString = JsonSerializer.Serialize
 			(
@@ -45,10 +53,7 @@ namespace FileUtilities
 
 			return jsonString;
 		}
-	}
-	
-	public class FileUtilitiesBasic
-	{
+		
 		public static string PromptForRelativeDirectory
 			(string pathReplace = null, string repeatString = "Would You like to use this folder?")
 		{
@@ -58,13 +63,13 @@ namespace FileUtilities
 			return dir;
 		}
 		
-		public static  void ListEntryCap <T>(List<T> myJsonFile, int totalCap)
+		public static  void ErraseOverflow <T>(List<T> listData, int totalCap)
 		{
-			int listCount = myJsonFile.Count;
+			int listCount = listData.Count;
 			int remove = listCount - totalCap;
 			if (remove > 1)
 			{
-				myJsonFile.RemoveRange(totalCap + 1, remove);
+				listData.RemoveRange(totalCap + 1, remove);
 			}
 		}
 		
@@ -122,6 +127,23 @@ namespace FileUtilities
 				outputFile.WriteLine(jsonString);
 			}
 		}
+
+		public static void AppendToFile(string filePath, string contents)
+		{
+			using(StreamWriter appenFile = File.AppendText(filePath))
+			{
+				appenFile.WriteLine(contents);
+			}
+			
+		}
+
+		public static void AppendTolist<T>(List<T> listDataOriginal, List<T> listDataToAppend)
+		{
+			for (int i = 0; i < listDataToAppend.Count; i++)
+			{
+				listDataOriginal.Add(listDataToAppend[i]);
+			}
+		}
 	}
 
 	namespace Types
@@ -152,7 +174,7 @@ namespace FileUtilities
 			private string jsonFormat;
 			public string JsonFormat
 			{
-				get { return JsonSerializeDataReturnString<T>(this.ListData); }
+				get { return SerializeJsonDataReturnString<T>(this.ListData); }
 			}
 			private string pathFileNameAndSuffix;
 			public string PathFileNameAndSuffix
@@ -164,26 +186,37 @@ namespace FileUtilities
 
 	namespace Prefabs
 	{
-		class ReadFileSortScoresSaveToList
+		class LoadFileToListThenSortAndCap
 		{
-			public void Begin<T>(CustomJsonFile<NameAndScoreSet> myJsonFile)
+			public static void Begin<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 			{
-				FileUtilitiesBasic.CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
-				myJsonFile.ListData.OrderByDescending(set => set.Score);
-				FileUtilitiesBasic.ListEntryCap(myJsonFile.ListData, 500);
+				string fileContent = ReadFromFile(myJsonFile.PathFileNameAndSuffix);
+				List<T> tempTransferList = new List<T>();
+				tempTransferList = DeserializeJsonStringReturnList<T>(fileContent);
+				AppendTolist<T>(myJsonFile.ListData,tempTransferList);
+				SortScore.Begin(myJsonFile,getProp);
+				ErraseOverflow<T>(myJsonFile.ListData, capLimit);
 			}
 		}
 		
-		class CreateFileAndWriteToJson
+		class SortScore
+		{
+			public static void Begin<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
+			{
+				myJsonFile.ListData.OrderByDescending(set => getProp(set));
+			}
+		}
+		
+		class CreateFileSortWriteToJson
 		{
 			public static void Begin<T>(CustomJsonFile<NameAndScoreSet> myJsonFile)
 			{
 				TestPathAndCreateFolder(myJsonFile.PathFileNameAndSuffix);
 				CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
-				WriteToFile(myJsonFile.PathFileNameAndSuffix, JsonSerializeDataReturnString(myJsonFile.ListData));
+				myJsonFile.ListData.OrderByDescending(set => set.Score);
+				WriteToFile(myJsonFile.PathFileNameAndSuffix, SerializeJsonDataReturnString(myJsonFile.ListData));
 			}
 		}
-		
 	}
 }
 
