@@ -13,10 +13,17 @@ using FileUtilities.Types;
 using static FileUtilities.FileUtilitiesBasic;
 
 /* TASKS:
-//TODO - Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
-//TODO - FEATURE: Append to List Class in filebasics
-//TODO - FEATURE: Append to File
-// FEATURE: SORT List Class?? Maybe I dont Need Sort?
+TODO - MAIN TASK: Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
+TODO - MAIN TASK: Add Unit Tests ...(Inprogress)...
+TODO - MoveDebugCustom to new project  file Called DebugToolsForJsonUtilities
+TODO - Change JsonUtilities003 From console project to dll library
+TODO - Create a Demo Project to go along with Dll called JsonUtilities003Demo
+TODO - Renaame file and namespace for unit test correctly
+TODO - REFACTOR: remove static property form all methods in FilUtilities namespace to go along with...
+todo - ...convention and have these objects be instantiated instead
+TODO - FEATURE: Add feature to change csv file to json file if Value names are given. example SCORE, NAME...
+todo - ...Or tke Form Header information.
+TODO - FEATURE: add a fancy input system with that asks you questions which can be used for any program
 */
 
 /*NOTES ON USAGE:
@@ -209,11 +216,11 @@ namespace FileUtilities
 		
 		class CreateFileSortWriteToJson
 		{
-			public static void Begin<T>(CustomJsonFile<NameAndScoreSet> myJsonFile)
+			public static void Begin<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp)
 			{
 				TestPathAndCreateFolder(myJsonFile.PathFileNameAndSuffix);
 				CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
-				myJsonFile.ListData.OrderByDescending(set => set.Score);
+				myJsonFile.ListData.OrderByDescending(set => getProp(set));
 				WriteToFile(myJsonFile.PathFileNameAndSuffix, SerializeJsonDataReturnString(myJsonFile.ListData));
 			}
 		}
