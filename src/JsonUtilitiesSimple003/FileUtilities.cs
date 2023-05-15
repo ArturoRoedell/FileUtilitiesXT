@@ -8,43 +8,51 @@ using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FileUtilities.Types;
+using static FileUtilities.FileUtilitiesBasic;
+using static FileUtilities.JsonUtilityBasics;
 
 /* TASKS:
+//TODO - Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
+//TODO - FEATURE: Append to List Class in filebasics
+//TODO - FEATURE: SORT List Class
 */
 
 namespace FileUtilities
 {
 	public class JsonUtilityBasics
 	{
-		public static void DeserializeScoreDataFromFileAndSaveToList<T>(CustomJsonFile<T> cjf)
+		public static List<T> JsonDeserializeDataReturnList<T>(CustomJsonFile<T> cjf)
 		{
+			List<T> FileData = null;
 			string content = File.ReadAllText(cjf.PathFileNameAndSuffix);
 			try
 			{
-				cjf.ListData = JsonSerializer.Deserialize<List<T>>(content);
+				FileData = JsonSerializer.Deserialize<List<T>>(content);
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine("Not A json file");
 			}
+			return FileData;
 		}
 
-		public static void SerializeDataAndWriteToFile<T>(CustomJsonFile<T> cjf)
+		public static string JsonSerializeDataReturnString<T>(List<T> listData)
 		{
 			string jsonString = JsonSerializer.Serialize
 			(
-				cjf.ListData, new JsonSerializerOptions() { WriteIndented = true }
+				listData, new JsonSerializerOptions() { WriteIndented = true }
 			);
-			File.WriteAllText(cjf.PathFileNameAndSuffix, jsonString);
+
+			return jsonString;
 		}
 	}
 	
 	public class FileUtilitiesBasic
 	{
-		public static string PromptForSaveFileDirectory(string pathReplace = null)
+		public static string PromptForRelativeDirectory
+			(string pathReplace = null, string repeatString = "Would You like to use this folder?")
 		{
 			string dir = Directory.GetCurrentDirectory();
-			string repeatString = "Would You like to use this folder to save your file";
 			bool Yes = selectionTools.YesNoSelection(repeatString);
 			dir = Yes ? dir : pathReplace;
 			return dir;
@@ -66,9 +74,9 @@ namespace FileUtilities
 			return concatString = path + @"\" + name + suffix;
 		}
 
-		public static void CreateFile(string path, string name)
+		public static void CreateFile(string filePath, string name)
 		{
-			string fullpathAndName = ConcatPathFileNameAndSuffix(path, name, Suffix.json);
+			string fullpathAndName = ConcatPathFileNameAndSuffix(filePath, name, Suffix.json);
 			FileStream fileStream = File.Create(fullpathAndName);
 		}
 
@@ -77,14 +85,10 @@ namespace FileUtilities
 			try
 			{
 				Directory.CreateDirectory(Path.GetDirectoryName(dirpath));
-			}
-			finally
-			{
-			}
-			
+			}finally {}
 		}
 		
-		public static string ReadFromCustomFile(string filepath)
+		public static string ReadFromFile(string filepath)
 		{
 			string contents = "";
 			var fileInfo = new FileInfo(filepath);
@@ -108,6 +112,14 @@ namespace FileUtilities
 				Directory.Exists(dir);
 				TestPathAndCreateFolder(dir);
 				FileStream fileStream = File.Create(filepath);
+			}
+		}
+		
+		public static void WriteToFile(string filePath, string jsonString)
+		{
+			using (StreamWriter outputFile = new StreamWriter(filePath))
+			{
+				outputFile.WriteLine(jsonString);
 			}
 		}
 	}
@@ -137,38 +149,26 @@ namespace FileUtilities
 			public string FileName { get; set; }
 			public string DirPath { get; set; }
 			public List<T> ListData { get; set; }
+			private string jsonFormat;
+			public string JsonFormat
+			{
+				get { return JsonSerializeDataReturnString<T>(this.ListData); }
+			}
 			private string pathFileNameAndSuffix;
 			public string PathFileNameAndSuffix
 			{
-				get { return this.DirPath + @"\" + this.FileName + Suffix.json; } // get method
-				set { pathFileNameAndSuffix = value; }
+				get { return this.DirPath + @"\" + this.FileName + Suffix.json; }
 			}
 		}
 	}
 
 	namespace Prefabs
 	{
-		class PrintToScreenMyJsonFile
-		{
-			public static void Begin<T>(CustomJsonFile<NameAndScoreSet> cjf)
-			{
-				Console.WriteLine("The Path " + cjf.DirPath + " The FileName" + cjf.FileName);
-				Console.WriteLine("The Complete File Path: " + cjf.PathFileNameAndSuffix);
-
-				foreach (NameAndScoreSet set in cjf.ListData)
-				{
-					Console.WriteLine($"Name: {set.Name} Score: {set.Score}");
-				}
-				
-			}
-		} //TODO -Move this somewhere else. Class For Games and Helicopter Game specific
-
 		class ReadFileSortScoresSaveToList
 		{
 			public void Begin<T>(CustomJsonFile<NameAndScoreSet> myJsonFile)
 			{
 				FileUtilitiesBasic.CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
-				JsonUtilityBasics.DeserializeScoreDataFromFileAndSaveToList(myJsonFile);
 				myJsonFile.ListData.OrderByDescending(set => set.Score);
 				FileUtilitiesBasic.ListEntryCap(myJsonFile.ListData, 500);
 			}
@@ -178,11 +178,12 @@ namespace FileUtilities
 		{
 			public static void Begin<T>(CustomJsonFile<NameAndScoreSet> myJsonFile)
 			{
-				FileUtilitiesBasic.TestPathAndCreateFolder(myJsonFile.PathFileNameAndSuffix);
-				FileUtilitiesBasic.CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
-				JsonUtilityBasics.SerializeDataAndWriteToFile(myJsonFile);
+				TestPathAndCreateFolder(myJsonFile.PathFileNameAndSuffix);
+				CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
+				WriteToFile(myJsonFile.PathFileNameAndSuffix, JsonSerializeDataReturnString(myJsonFile.ListData));
 			}
 		}
 		
 	}
 }
+
