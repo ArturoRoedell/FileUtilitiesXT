@@ -1,25 +1,23 @@
 using System.Diagnostics;
-using FileUtilities;
-
+using static FileUtilitiesBasic;
 using System.Collections.Generic; 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using FileUtilities.Types;
 using Microsoft.VisualBasic;
-using  static FileUtilities.FileUtilitiesBasic;
+using static Types;
 
 
 namespace JsonUtilitiesSimple003.Tests;
 
 public class FileUtilitiesBasicTest
 {
+	private FileUtilitiesBasic _fileUtilitiesBasic = new FileUtilitiesBasic();
 	[Fact]
 	public void ShouldPutPathTotgether()
 	{
 		string path = @"C:\MyFolder";
 		string filename = "HighSocres";
 		string expected = @"C:\MyFolder\HighSocres.json";
-		string actual = ConcatPathFileNameAndSuffix(path, filename, ".json");
+		string actual = _fileUtilitiesBasic.ConcatPathFileNameAndSuffix(path, filename, ".json");
 		Xunit.Assert.Equal(expected, actual);
 	}
 
@@ -30,7 +28,7 @@ public class FileUtilitiesBasicTest
 			@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003.Tests\" + 
 			@"TestCreationFile\UnicornSecrets.txt";
 		File.Delete(FilePath);
-		CheckIfFileExistsThenCreateIt(FilePath);
+		_fileUtilitiesBasic.CheckIfFileExistsThenCreateIt(FilePath);
 		Xunit.Assert.True(File.Exists(FilePath));
 	}
 	
@@ -52,7 +50,7 @@ public class FileUtilitiesBasicTest
 		List<NameAndScoreSet> expectedList = new List<NameAndScoreSet>();
 		expectedList.Add(new NameAndScoreSet("Arty", 481));
 		expectedList.Add(new NameAndScoreSet("Jessica", 3454));
-		List<NameAndScoreSet> actualList = DeserializeJsonStringReturnList<NameAndScoreSet>(JsonRawData);
+		List<NameAndScoreSet> actualList = _fileUtilitiesBasic.DeserializeJsonStringReturnList<NameAndScoreSet>(JsonRawData);
 		CollectionAssert.AreNotEquivalent(expectedList,actualList);
 	}
 	
@@ -74,7 +72,7 @@ public class FileUtilitiesBasicTest
   }
 ]
 ";
-		string actualJsonData = SerializeJsonDataReturnString(listData);
+		string actualJsonData = _fileUtilitiesBasic.SerializeJsonDataReturnString(listData);
 		Xunit.Assert.Matches(expectedJsonData,actualJsonData);
 	}
 }
