@@ -15,7 +15,6 @@ using static FileUtilities.FileUtilitiesBasic;
 /* TASKS:
 MAINTASKONGOING: Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
 MAINTASK: Add Unit Tests ...(Inprogress)...
-MAINTASK: Remove dependencies, build, nuget, etc files from repository. These include bin  and obj folders
 SECONDARYTASK - Rename file and namespace for unit test correctly
 SECONDARYTASK - Create a Demo Project to go along with Dll called JsonUtilities003Demo
 SECONDARYTASK - REFACTOR: remove static property form all methods in FilUtilities namespace to go along with...
@@ -23,6 +22,7 @@ secondarytask - ...convention and have these objects be instantiated instead
 TODO - FEATURE: Add feature to change csv file to json file if Value names are given. example SCORE, NAME...
 todo - ...Or tke Form Header information.
 TODO - FEATURE: add a fancy input system with that asks you questions which can be used for any program
+BUG Sort method seems broken. please experiment and fix
 */
 
 /*NOTES ON USAGE:
