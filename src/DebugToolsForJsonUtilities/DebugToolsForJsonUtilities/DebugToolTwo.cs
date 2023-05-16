@@ -18,11 +18,66 @@ public class Bebug01
 		customJsonFile.FileName = "artysdfsfFile";
 		customJsonFile.DirPath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest001";
 		customJsonFile.ListData = HighScoreList;
+
 		
+		Console.WriteLine("List Unsorted");
+		Console.WriteLine(customJsonFile.JsonFormat);
+		
+		Console.WriteLine("\n List Sorted");
+		CreateFileSortWriteToJson.Begin<NameAndScoreSet>(customJsonFile, x => x.Score); //KEY: .Begin<{type}>(customJsonFile, x => x.{property}) 
 		
 		Console.WriteLine(customJsonFile.JsonFormat);
 		
+
+		Console.WriteLine("Deleting The list Shold Be empty");
+		customJsonFile.ListData.Clear();
+		Console.WriteLine(customJsonFile.JsonFormat);
+		Console.WriteLine("IsThere Something Aboveme");
+		Console.WriteLine("Repopulating The List Then Printing it");
+		LoadFileToListThenSortAndCap.Begin<NameAndScoreSet>(customJsonFile, x => x.Score); // KEY: .Begin<{type}>(customJsonFile, x => x.{property}) 
 		
+		
+		LoadFileToListThenSortAndCap.Begin<NameAndScoreSet>(customJsonFile, x => x.Score);
+		LoadFileToListThenSortAndCap.Begin<NameAndScoreSet>(customJsonFile, x => x.Score);
+		LoadFileToListThenSortAndCap.Begin<NameAndScoreSet>(customJsonFile, x => x.Score);
+		Console.WriteLine(customJsonFile.JsonFormat);
+		
+
+		return;
+		
+		for (int i = 0; i < customJsonFile.ListData.Count(); i++)
+		{
+			Console.WriteLine(customJsonFile.ListData[i]);
+		}
+		//foreach (var e in customJsonFile.ListData)
+		//{
+			//Console.WriteLine("Something Should Be here");
+			//Console.WriteLine(e.Name + " " + e.Score);
+		//}
+		//Console.WriteLine(customJsonFile.JsonFormat);
+		List<NameAndScoreSet> newList = new List<NameAndScoreSet>(customJsonFile.ListData.OrderByDescending(set => set.Score));
+		Console.WriteLine("Are they in Order?");
+
+		
+		//Console.WriteLine(HighScoreList[1]);
+		//Console.WriteLine(customJsonFile.ListData[1]);
+				
+		for (int i = 0; i < newList.Count(); i++)
+		{
+			Console.WriteLine(newList[i]);
+		}
+		// foreach (var e in customJsonFile.ListData)
+		// {
+		// 	//Console.WriteLine("Something Should Be here");
+		// 	Console.WriteLine(e.Name + " " + e.Score);
+		// }
+
+		customJsonFile.ListData = newList;
+
+		Console.WriteLine("\n Is Json String in order now??\n");
+		Console.WriteLine(customJsonFile.JsonFormat);
+
+		return;
 		//FileUtilitiesBasic.CheckIfFileExistsThenCreateIt(customJsonFile.PathFileNameAndSuffix);
 
 		

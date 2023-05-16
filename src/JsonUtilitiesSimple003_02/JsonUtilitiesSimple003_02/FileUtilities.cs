@@ -22,7 +22,6 @@ secondarytask - ...convention and have these objects be instantiated instead
 TODO - FEATURE: Add feature to change csv file to json file if Value names are given. example SCORE, NAME...
 todo - ...Or tke Form Header information.
 TODO - FEATURE: add a fancy input system with that asks you questions which can be used for any program
-BUG Sort method seems broken. please experiment and fix
 */
 
 /*NOTES ON USAGE:
@@ -164,6 +163,11 @@ namespace FileUtilities
 			this.Name = name;
 			this.Score = score;
 		}
+		public override string ToString()
+		{
+			return "Name: " + Name + "   Score: " + Score;
+		}
+		
 	}
 
 		static class Suffix
@@ -209,7 +213,8 @@ namespace FileUtilities
 		{
 			public static void Begin<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
 			{
-				myJsonFile.ListData.OrderByDescending(set => getProp(set));
+				List<T> transferList =  new List<T>(myJsonFile.ListData.OrderByDescending(set => getProp(set)));
+				myJsonFile.ListData = transferList;
 			}
 		}
 		
@@ -219,7 +224,7 @@ namespace FileUtilities
 			{
 				TestPathAndCreateFolder(myJsonFile.PathFileNameAndSuffix);
 				CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
-				myJsonFile.ListData.OrderByDescending(set => getProp(set));
+				SortScore.Begin(myJsonFile,getProp);
 				WriteToFile(myJsonFile.PathFileNameAndSuffix, SerializeJsonDataReturnString(myJsonFile.ListData));
 			}
 		}
