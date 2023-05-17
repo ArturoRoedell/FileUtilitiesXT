@@ -2,133 +2,227 @@
 using static FileUtilitiesBasic;
 using static Types;
 
+/*NOTES: Scratch code when debuging
+ Nothing should be referencing this area of the project.
+ It is a mess and I don't mind if it stays a mess
+*/
 namespace DebugTests;
 
 public class Bebug01
 {
 	public static void Begin()
 	{
+
 		List<NameAndScoreSet> HighScoreList = new List<NameAndScoreSet>();
 		AddNamesAndScoresToList("Arty", 481, HighScoreList);
-		AddNamesAndScoresToList("Arty", 3454, HighScoreList);
+		AddNamesAndScoresToList("Cherry", 3454, HighScoreList);
 		AddNamesAndScoresToList("Jessica", 462, HighScoreList);
 		AddNamesAndScoresToList("Arty", 865, HighScoreList);
-		CustomJsonFile<NameAndScoreSet> customJsonFile = new CustomJsonFile<NameAndScoreSet>();
-		customJsonFile.FileName = "artysdfsfFile";
-		customJsonFile.DirPath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest001";
-		customJsonFile.ListData = HighScoreList;
+		CustomJsonFile<NameAndScoreSet> myJsonFile = new CustomJsonFile<NameAndScoreSet>();
+		myJsonFile.FileName = "artysdfsfFile";
+		myJsonFile.DirPath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest001";
+		myJsonFile.ListData = HighScoreList;
+		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		
+		Console.WriteLine("Get Prompt");
+		string getthisDirectory = fileUtilitiesBasic.PromptForRelativeDirectory(@"C:Pretend/Folder\\notTrue");
 
 		
+		return;
+		
+		
+		
+		
+		fileUtilitiesBasic.CreateFileSortWriteToJson<NameAndScoreSet>(myJsonFile,x => x.Score);
+		
+		Console.WriteLine("\nBefore Clear\n");
+
+		for (int i = 0; i < myJsonFile.ListData.Count(); i++)
+		{
+			Console.WriteLine(myJsonFile.ListData[i]);
+		}
+		
+		//myJsonFile.ListData.Clear();
+		
+		Console.WriteLine("\nAfter Clear\n");
+		
+		for (int i = 0; i < myJsonFile.ListData.Count(); i++)
+		{
+			Console.WriteLine(myJsonFile.ListData[i]);
+		}
+
+		Console.WriteLine("writeThis");
+		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		
+		Console.WriteLine("\nLoad From File\n");
+		for (int i = 0; i < myJsonFile.ListData.Count(); i++)
+		{
+			Console.WriteLine(myJsonFile.ListData[i]);
+		}
+
+		
+		return;
+		
+		
+		
+		
+		//HighScoreList.Clear();
+		
+		for (int i = 0; i < HighScoreList.Count(); i++)
+		{
+			Console.WriteLine(HighScoreList[i]);
+		}
+		
+		List<NameAndScoreSet> BetterScores = new List<NameAndScoreSet>();
+		AddNamesAndScoresToList("duro", 4721, BetterScores);
+		AddNamesAndScoresToList("Marco", 7554, BetterScores);
+		
+		BetterScores.Clear();
+		Console.WriteLine("\n Better Scores\n");
+		for (int i = 0; i < BetterScores.Count(); i++)
+		{
+			Console.WriteLine(BetterScores[i]);
+			
+		}
+
+		Console.WriteLine("\n ScoresTogether In one\n");
+		
+		fileUtilitiesBasic.AppendToAndRetunList(HighScoreList, BetterScores);
+		
+		for (int i = 0; i < HighScoreList.Count(); i++)
+		{
+			Console.WriteLine(HighScoreList[i]);
+		}
+		return;
+		//-----------------------
+		
+		
+		for (int i = 0; i < HighScoreList.Count(); i++)
+		{
+			Console.WriteLine(HighScoreList[i]);
+		}
+		Console.WriteLine("\n Reduce Items Below\n");
+		
+		fileUtilitiesBasic.ErraseOverflow(HighScoreList, 2 );
+		
+		for (int i = 0; i < HighScoreList.Count(); i++)
+		{
+			Console.WriteLine(HighScoreList[i]);
+		}
+
+		return;
+		//-----------------------
+		
 		Console.WriteLine("List Unsorted");
-		Console.WriteLine(customJsonFile.JsonFormat);
+		Console.WriteLine(myJsonFile.JsonFormat);
 		
 		Console.WriteLine("\n List Sorted");
 
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
-		
-		fileUtilitiesBasic.CreateFileSortWriteToJson<NameAndScoreSet>(customJsonFile, x => x.Score); //KEY: .Begin<{type}>(customJsonFile, x => x.{property}) 
 		
 		
-		Console.WriteLine(customJsonFile.JsonFormat);
+		fileUtilitiesBasic.CreateFileSortWriteToJson<NameAndScoreSet>(myJsonFile, x => x.Score); //KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
+		
+		
+		Console.WriteLine(myJsonFile.JsonFormat);
 		
 
 		Console.WriteLine("Deleting The list Shold Be empty");
-		customJsonFile.ListData.Clear();
-		Console.WriteLine(customJsonFile.JsonFormat);
+		myJsonFile.ListData.Clear();
+		Console.WriteLine(myJsonFile.JsonFormat);
 		Console.WriteLine("IsThere Something Aboveme");
 		Console.WriteLine("Repopulating The List Then Printing it");
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(customJsonFile, x => x.Score); // KEY: .Begin<{type}>(customJsonFile, x => x.{property}) 
+		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score); // KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
 		
 		
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(customJsonFile, x => x.Score);
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(customJsonFile, x => x.Score);
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(customJsonFile, x => x.Score);
-		Console.WriteLine(customJsonFile.JsonFormat);
+		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		Console.WriteLine(myJsonFile.JsonFormat);
 		
 
 		return;
 		
-		for (int i = 0; i < customJsonFile.ListData.Count(); i++)
+		for (int i = 0; i < myJsonFile.ListData.Count(); i++)
 		{
-			Console.WriteLine(customJsonFile.ListData[i]);
+			Console.WriteLine(myJsonFile.ListData[i]);
 		}
-		//foreach (var e in customJsonFile.ListData)
+		//foreach (var e in myJsonFile.ListData)
 		//{
 			//Console.WriteLine("Something Should Be here");
 			//Console.WriteLine(e.Name + " " + e.Score);
 		//}
-		//Console.WriteLine(customJsonFile.JsonFormat);
-		List<NameAndScoreSet> newList = new List<NameAndScoreSet>(customJsonFile.ListData.OrderByDescending(set => set.Score));
+		//Console.WriteLine(myJsonFile.JsonFormat);
+		List<NameAndScoreSet> newList = new List<NameAndScoreSet>(myJsonFile.ListData.OrderByDescending(set => set.Score));
 		Console.WriteLine("Are they in Order?");
 
 		
 		//Console.WriteLine(HighScoreList[1]);
-		//Console.WriteLine(customJsonFile.ListData[1]);
+		//Console.WriteLine(myJsonFile.ListData[1]);
 				
 		for (int i = 0; i < newList.Count(); i++)
 		{
 			Console.WriteLine(newList[i]);
 		}
-		// foreach (var e in customJsonFile.ListData)
+		// foreach (var e in myJsonFile.ListData)
 		// {
 		// 	//Console.WriteLine("Something Should Be here");
 		// 	Console.WriteLine(e.Name + " " + e.Score);
 		// }
 
-		customJsonFile.ListData = newList;
+		myJsonFile.ListData = newList;
 
 		Console.WriteLine("\n Is Json String in order now??\n");
-		Console.WriteLine(customJsonFile.JsonFormat);
+		Console.WriteLine(myJsonFile.JsonFormat);
 
 		return;
-		//fileUtilitiesBasic.CheckIfFileExistsThenCreateIt(customJsonFile.PathFileNameAndSuffix);
+		//fileUtilitiesBasic.CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
 
 		
-		//FileUtilities.Prefabs.CreateFileSortWriteToJson.Begin<NameAndScoreSet>(customJsonFile, x => x.Score); // TODO - This works Great Need To Create a unit Test. except not sorted
+		//FileUtilities.Prefabs.CreateFileSortWriteToJson.Begin<NameAndScoreSet>(myJsonFile, x => x.Score); // TODO - This works Great Need To Create a unit Test. except not sorted
 		
-		fileUtilitiesBasic.SerializeJsonDataReturnString<NameAndScoreSet>(customJsonFile.ListData);
+		fileUtilitiesBasic.SerializeJsonDataReturnString<NameAndScoreSet>(myJsonFile.ListData);
 		
 		
 		Console.WriteLine("Deleting The list Shold Be empty");
-		customJsonFile.ListData.Clear();
-		Console.WriteLine(customJsonFile.JsonFormat);
+		myJsonFile.ListData.Clear();
+		Console.WriteLine(myJsonFile.JsonFormat);
 		Console.WriteLine("IsThere Something Aboveme");
 		
 		
 		Console.WriteLine("Repopulating The List Then Printing it");
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(customJsonFile, x => x.Score);
+		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
 		
-		Console.WriteLine(customJsonFile.JsonFormat);
-		foreach (var e in customJsonFile.ListData)
+		Console.WriteLine(myJsonFile.JsonFormat);
+		foreach (var e in myJsonFile.ListData)
 		{
 			Console.WriteLine("Something Should Be here");
 			Console.WriteLine(e.Name + " " + e.Score);
 		}
 		return;
 		//------------------------------------
-		Console.WriteLine(customJsonFile.JsonFormat);
+		Console.WriteLine(myJsonFile.JsonFormat);
 		
-		foreach (NameAndScoreSet set in customJsonFile.ListData)
+		foreach (NameAndScoreSet set in myJsonFile.ListData)
 		{
 			Console.WriteLine($"Name: {set.Name} Score: {set.Score}");
 		}
 
-		//customJsonFile.ListData.Clear();
+		//myJsonFile.ListData.Clear();
 
 		Console.WriteLine("Is there Something Here?\n");
 
-		customJsonFile.ListData =
+		myJsonFile.ListData =
 			fileUtilitiesBasic.DeserializeJsonStringReturnList<NameAndScoreSet>(
-				customJsonFile.PathFileNameAndSuffix);
+				myJsonFile.PathFileNameAndSuffix);
 		
 
 		
-		PrintToScreenMyJsonFile.Begin<NameAndScoreSet>(customJsonFile);
+		PrintToScreenMyJsonFile.Begin<NameAndScoreSet>(myJsonFile);
 
-		customJsonFile.ListData.Clear();
+		myJsonFile.ListData.Clear();
 
 
-		foreach (var e in customJsonFile.ListData)
+		foreach (var e in myJsonFile.ListData)
 		{
 			Console.WriteLine("Something Should Be here");
 			Console.WriteLine(e.Name + " " + e.Score);
@@ -145,12 +239,12 @@ public class Bebug01
 
 class PrintToScreenMyJsonFile
 {
-	public static void Begin<T>(CustomJsonFile<NameAndScoreSet> cjf)
+	public static void Begin<T>(CustomJsonFile<NameAndScoreSet> myJsonFile)
 	{
-		Console.WriteLine("The Path " + cjf.DirPath + " The FileName" + cjf.FileName);
-		Console.WriteLine("The Complete File Path: " + cjf.PathFileNameAndSuffix);
+		Console.WriteLine("The Path " + myJsonFile.DirPath + " The FileName" + myJsonFile.FileName);
+		Console.WriteLine("The Complete File Path: " + myJsonFile.PathFileNameAndSuffix);
 
-		foreach (NameAndScoreSet set in cjf.ListData)
+		foreach (NameAndScoreSet set in myJsonFile.ListData)
 		{
 			Console.WriteLine($"Name: {set.Name} Score: {set.Score}");
 		}

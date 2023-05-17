@@ -31,7 +31,7 @@ public class  selectionTools
 		bool loopme = true;
 		bool BoolYes = true;
 		do{
-			string repeatString = ChoiceAsk + " Y /  N";
+			string repeatString = ChoiceAsk + "\n Y /  N";
 			//int choice = CaseSelect(repeatString);
 			string choice = CaseSelect(repeatString);
 			switch (choice)

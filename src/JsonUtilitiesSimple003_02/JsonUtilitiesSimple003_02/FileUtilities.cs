@@ -13,15 +13,12 @@ using static Types;
 using static FileUtilitiesBasic;
 
 /* TASKS:
-MAINTASKONGOING: Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
-MAINTASK: Add Unit Tests ...(Inprogress)...
-SECONDARYTASK - Rename file and namespace for unit test correctly
-SECONDARYTASK - Create three more Unit tests
-SECONDARYTASK - Add Data from Debug to start of Unit test to rull all tests
-TODO - PIPEDREAM: Create a Demo Project to go along with Dll called JsonUtilities003Demo
-TODO - FEATURE: Add feature to change csv file to json file if Value names are given. example SCORE, NAME...
+MAINTASKONGOING: PIPEDREAM: Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
+MAINTASK: PIPEDREAM: Add Unit Tests ...(Inprogress)...
+TODO - PIPEDREAM: Add feature to change csv file to json file if Value names are given. example SCORE, NAME...
 todo - ...Or tke Form Header information.
-TODO - FEATURE: add a fancy input system with that asks you questions which can be used for any program
+TODO - PIPEDREAM: add a fancy input system with that asks you questions which can be used for any program
+TODO - PIPEDREAM: Create a Demo Project to go along with Dll called JsonUtilities003Demo
 */
 
 /*NOTES ON USAGE:
@@ -30,150 +27,176 @@ TODO - FEATURE: add a fancy input system with that asks you questions which can 
 // add data to list then, serialize, write file. 
 */
 
-	public class FileUtilitiesBasic
+public class FileUtilitiesBasic
+{
+	public  void LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 	{
-		public  void LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
+		string fileContent = ReadFromFile(myJsonFile.PathFileNameAndSuffix);
+		List<T> tempTransferList = new List<T>();
+		tempTransferList = DeserializeJsonStringReturnList<T>(fileContent);
+		if (!(tempTransferList == null))
 		{
-			string fileContent = ReadFromFile(myJsonFile.PathFileNameAndSuffix);
-			List<T> tempTransferList = new List<T>();
-			tempTransferList = DeserializeJsonStringReturnList<T>(fileContent);
-			AppendTolist<T>(myJsonFile.ListData,tempTransferList);
-			SortScore(myJsonFile,getProp);
-			ErraseOverflow<T>(myJsonFile.ListData, capLimit);
+			myJsonFile.ListData = AppendToAndRetunList<T>(myJsonFile.ListData,tempTransferList);
+		}
+		Console.WriteLine(myJsonFile.ListData.Count);
+		SortScore(myJsonFile,getProp);
+		Console.WriteLine("Current Number Of items" + myJsonFile.ListData.Count);
+		ErraseOverflow<T>(myJsonFile.ListData, capLimit);
+		Console.WriteLine("Current Number Of items" + myJsonFile.ListData.Count);
+	}
+
+	public  void SortScore<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
+	{
+		List<T> transferList =  new List<T>(myJsonFile.ListData.OrderByDescending(set => getProp(set)));
+		myJsonFile.ListData = transferList;
+	}
+
+	public  void CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp)
+	{
+		TestPathAndCreateFolder(myJsonFile.PathFileNameAndSuffix);
+		CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
+		SortScore(myJsonFile,getProp);
+		WriteToFile(myJsonFile.PathFileNameAndSuffix, SerializeJsonDataReturnString(myJsonFile.ListData));
+	}
+		
+	public  List<T> DeserializeJsonStringReturnList<T>(string fileContent)
+	{
+		List<T> FileDataList = new List<T>();
+		try
+		{
+			FileDataList = JsonSerializer.Deserialize<List<T>>(fileContent);
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine("Not A json file");
+		}
+		return FileDataList;
+	}
+
+	public  string SerializeJsonDataReturnString<T>(List<T> listData)
+	{
+		string jsonString = JsonSerializer.Serialize
+		(
+			listData, new JsonSerializerOptions() { WriteIndented = true }
+		);
+
+		return jsonString;
+	}
+		
+	public  string PromptForRelativeDirectory
+		(string pathReplace = null, string repeatString = "Would You like to use this relative directory folder shown above?")
+	{
+		string dir = Directory.GetCurrentDirectory();
+		Console.WriteLine(dir);
+		bool Yes = selectionTools.YesNoSelection(repeatString);
+		dir = Yes ? dir : pathReplace;
+		Console.WriteLine("Directory below will be used:\n"+ dir);
+		return dir;
+	}
+		
+	public  void ErraseOverflow <T>(List<T> listData, int totalCap)
+	{
+		int listCount = listData.Count;
+		int remove = listCount - totalCap;
+		if (remove > 0)
+		{
+			listData.RemoveRange(totalCap, remove);
+		}
+		Console.WriteLine("Current Number Of items" + listData.Count);
+	}
+		
+	public  string ConcatPathFileNameAndSuffix(string path, string name, string suffix)
+	{
+		string concatString;
+		return concatString = path + @"\" + name + suffix;
+	}
+
+	public  void CreateFile(string filePath, string name)
+	{
+		string fullpathAndName = ConcatPathFileNameAndSuffix(filePath, name, Suffix.json);
+		FileStream fileStream = File.Create(fullpathAndName);
+		fileStream.Close();
+	}
+
+	public  void TestPathAndCreateFolder(string dirpath)
+	{
+		try
+		{
+			Directory.CreateDirectory(Path.GetDirectoryName(dirpath));
+		}finally {}
+	}
+		
+	public  string ReadFromFile(string filepath)
+	{
+		string contents = "";
+		var fileInfo = new FileInfo(filepath);
+		if (fileInfo.Length == 0)
+		{
+			Console.WriteLine("Error Empty File");
+		}
+		else
+		{
+			contents = File.ReadAllText(filepath);
 		}
 
-		public  void SortScore<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
-		{
-			List<T> transferList =  new List<T>(myJsonFile.ListData.OrderByDescending(set => getProp(set)));
-			myJsonFile.ListData = transferList;
-		}
+		return contents;
+	}
 		
+	public  void CheckIfFileExistsThenCreateIt(string filepath)
+	{
+		string dir = Path.GetDirectoryName(filepath);
+		if (!(File.Exists(filepath)))
+		{
+			Directory.Exists(dir);
+			TestPathAndCreateFolder(dir);
+			FileStream fileStream = File.Create(filepath);
+			fileStream.Close();
+		}
+	}
+		
+	public  void WriteToFile(string filePath, string jsonString)
+	{
+		using (StreamWriter streamWriter = new StreamWriter(filePath))
+		{
+			streamWriter.WriteLine(jsonString);
+			streamWriter.Close();
+		}
+	}
 
-		public  void CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp)
+	public  void AppendToFile(string filePath, string contents)
+	{
+		using(StreamWriter streamWriter = File.AppendText(filePath))
 		{
-			TestPathAndCreateFolder(myJsonFile.PathFileNameAndSuffix);
-			CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
-			SortScore(myJsonFile,getProp);
-			WriteToFile(myJsonFile.PathFileNameAndSuffix, SerializeJsonDataReturnString(myJsonFile.ListData));
+			streamWriter.WriteLine(contents);
+			streamWriter.Close();
 		}
-		
-		public  List<T> DeserializeJsonStringReturnList<T>(string fileContent)
-		{
-			List<T> FileDataList = null;
-			//string fileContent = File.ReadAllText(filePath);
-			try
-			{
-				FileDataList = JsonSerializer.Deserialize<List<T>>(fileContent);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Not A json file");
-			}
-			return FileDataList;
-		}
-
-		public  string SerializeJsonDataReturnString<T>(List<T> listData)
-		{
-			string jsonString = JsonSerializer.Serialize
-			(
-				listData, new JsonSerializerOptions() { WriteIndented = true }
-			);
-
-			return jsonString;
-		}
-		
-		public  string PromptForRelativeDirectory
-			(string pathReplace = null, string repeatString = "Would You like to use this folder?")
-		{
-			string dir = Directory.GetCurrentDirectory();
-			bool Yes = selectionTools.YesNoSelection(repeatString);
-			dir = Yes ? dir : pathReplace;
-			return dir;
-		}
-		
-		public   void ErraseOverflow <T>(List<T> listData, int totalCap)
-		{
-			int listCount = listData.Count;
-			int remove = listCount - totalCap;
-			if (remove > 1)
-			{
-				listData.RemoveRange(totalCap + 1, remove);
-			}
-		}
-		
-		public  string ConcatPathFileNameAndSuffix(string path, string name, string suffix)
-		{
-			string concatString;
-			return concatString = path + @"\" + name + suffix;
-		}
-
-		public  void CreateFile(string filePath, string name)
-		{
-			string fullpathAndName = ConcatPathFileNameAndSuffix(filePath, name, Suffix.json);
-			FileStream fileStream = File.Create(fullpathAndName);
-		}
-
-		public  void TestPathAndCreateFolder(string dirpath)
-		{
-			try
-			{
-				Directory.CreateDirectory(Path.GetDirectoryName(dirpath));
-			}finally {}
-		}
-		
-		public  string ReadFromFile(string filepath)
-		{
-			string contents = "";
-			var fileInfo = new FileInfo(filepath);
-			if (fileInfo.Length == 0)
-			{
-				Console.WriteLine("Error Empty File");
-			}
-			else
-			{
-				contents = File.ReadAllText(filepath);
-			}
-
-			return contents;
-		}
-		
-		public  void CheckIfFileExistsThenCreateIt(string filepath)
-		{
-			string dir = Path.GetDirectoryName(filepath);
-			if (!(File.Exists(filepath)))
-			{
-				Directory.Exists(dir);
-				TestPathAndCreateFolder(dir);
-				FileStream fileStream = File.Create(filepath);
-			}
-		}
-		
-		public  void WriteToFile(string filePath, string jsonString)
-		{
-			using (StreamWriter outputFile = new StreamWriter(filePath))
-			{
-				outputFile.WriteLine(jsonString);
-			}
-		}
-
-		public  void AppendToFile(string filePath, string contents)
-		{
-			using(StreamWriter appenFile = File.AppendText(filePath))
-			{
-				appenFile.WriteLine(contents);
-			}
 			
+	}
+
+	public List<T> AppendToAndRetunList<T>(List<T> listDataOriginal, List<T> listDataToAppend)
+	{
+		List<T> newList = new List<T>();
+		if (listDataOriginal == null)
+		{
+			listDataOriginal = newList;
 		}
 
-		public  void AppendTolist<T>(List<T> listDataOriginal, List<T> listDataToAppend)
+		if (listDataOriginal.Count == 0)
+		{
+			listDataOriginal = listDataToAppend;
+		}
+		else
 		{
 			for (int i = 0; i < listDataToAppend.Count; i++)
 			{
 				listDataOriginal.Add(listDataToAppend[i]);
 			}
 		}
-		
+		Console.WriteLine(listDataOriginal.Count);
+		return listDataOriginal;
 	}
+		
+}
 
 public class Types
 { 
@@ -181,7 +204,6 @@ public class Types
 	{
 		public string Name { get; set; }
 		public int Score { get; set; }
-
 		public NameAndScoreSet(string name, int score)
 		{
 			this.Name = name;
@@ -191,7 +213,6 @@ public class Types
 		{
 			return "Name: " + Name + "   Score: " + Score;
 		}
-		
 	}
 
 	public static class Suffix
