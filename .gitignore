@@ -1,9 +1,9 @@
 .git/
 .idea/
 .vs/
-src/DebugToolsForJsonUtilities/DebugToolsForJsonUtilities/bin/
-src/DebugToolsForJsonUtilities/DebugToolsForJsonUtilities/obj/
+src/DebugToolsForJsonUtilities/bin/
+src/DebugToolsForJsonUtilities/obj/
 src/JsonUtilitiesSimple003.Tests/bin/
 src/JsonUtilitiesSimple003.Tests/obj/
-src/JsonUtilitiesSimple003_02/JsonUtilitiesSimple003_02/bin/
-src/JsonUtilitiesSimple003_02/JsonUtilitiesSimple003_02/obj/
+src/JsonUtilitiesSimple003_02/bin/
+src/JsonUtilitiesSimple003_02/obj/

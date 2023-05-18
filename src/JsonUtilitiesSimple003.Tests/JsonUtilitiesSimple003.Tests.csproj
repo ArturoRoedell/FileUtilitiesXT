@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="JsonUtilitiesSimple003_02">
-      <HintPath>..\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02\bin\Debug\net6.0\JsonUtilitiesSimple003_02.dll</HintPath>
+    <Reference Include="FileUtilitiesXT.Library">
+      <HintPath>..\JsonUtilitiesSimple003_02\bin\Debug\net6.0\FileUtilitiesXT.Library.dll</HintPath>
     </Reference>
   </ItemGroup>
 
