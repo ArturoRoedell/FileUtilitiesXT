@@ -1,5 +1,6 @@
 ﻿using System;
-using static Types;
+using static FileUtilitiesXT.Types;
+using static FileUtilitiesXT;
 
 /* ## MY TASKS
 * 
@@ -65,7 +66,7 @@ class Program
 	{
 		//Arrange
 		Types.CustomJsonFile<NameScoreDifficulty> myJsonFile = new Types.CustomJsonFile<NameScoreDifficulty>();
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
 
@@ -104,7 +105,7 @@ class Program
 		}
 		
 		//Act
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameScoreDifficulty>(myJsonFile, x => x.Score,25);
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameScoreDifficulty>(myJsonFile, x => x.Score,25);
 		
 		Console.WriteLine(myJsonFile.JsonFormat);
 		//Assert

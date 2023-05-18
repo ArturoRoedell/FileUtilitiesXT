@@ -9,12 +9,13 @@ using System.Net.Mime;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using static Types;
-using static FileUtilitiesBasic;
+using static FileUtilitiesXT.Types;
+using static FileUtilitiesXT;
 
 /* TASKS:
 MAINTASKONGOING: PIPEDREAM: Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
-MAINTASK: PIPEDREAM: Add Unit Tests ...(Inprogress)...
+MAINTASK: Finish adding Unit Tests ...(Inprogress)...
+MAINTASK: Add Version Author and Name to Project fileProperties
 TODO - PIPEDREAM: Add feature to change csv file to json file if Value names are given. example SCORE, NAME...
 todo - ...Or tke Form Header information.
 TODO - PIPEDREAM: add a fancy input system with that asks you questions which can be used for any program
@@ -27,10 +28,11 @@ TODO - PIPEDREAM: Create a Demo Project to go along with Dll called JsonUtilitie
 // add data to list then, serialize, write file. 
 */
 
-public class FileUtilitiesBasic
+public class FileUtilitiesXT
 {
 	public  void LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 	{
+		CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
 		string fileContent = ReadFromFile(myJsonFile.PathFileNameAndSuffix);
 		List<T> tempTransferList = new List<T>();
 		tempTransferList = DeserializeJsonStringReturnList<T>(fileContent);
@@ -128,6 +130,10 @@ public class FileUtilitiesBasic
 		
 	public  string ReadFromFile(string filepath)
 	{
+		if(!(File.Exists(filepath)))
+		{
+			return null;
+		};
 		string contents = "";
 		var fileInfo = new FileInfo(filepath);
 		if (fileInfo.Length == 0)
@@ -195,47 +201,47 @@ public class FileUtilitiesBasic
 		Console.WriteLine(listDataOriginal.Count);
 		return listDataOriginal;
 	}
+	public class Types
+	{ 
+		public class NameAndScoreSet
+		{
+			public string Name { get; set; }
+			public int Score { get; set; }
+			public NameAndScoreSet(string name, int score)
+			{
+				this.Name = name;
+				this.Score = score;
+			}
+			public override string ToString()
+			{
+				return "Name: " + Name + "   Score: " + Score;
+			}
+		}
+
+		public static class Suffix
+		{
+			public static string json = ".json";
+			public static string txt = ".txt";
+		}
+
+		public class CustomJsonFile<T>
+		{
+			private FileUtilitiesXT _fileUtilitiesXt = new FileUtilitiesXT();
+			public string FileName { get; set; }
+			public string DirPath { get; set; }
+			public List<T> ListData { get; set; }
+			private string jsonFormat;
+			public string JsonFormat
+			{
+				get { return _fileUtilitiesXt.SerializeJsonDataReturnString<T>(this.ListData); }
+			}
+			private string pathFileNameAndSuffix;
+			public string PathFileNameAndSuffix
+			{
+				get { return this.DirPath + @"\" + this.FileName + Suffix.json; }
+			}
+		}
+	}
 		
 }
 
-public class Types
-{ 
-	public class NameAndScoreSet
-	{
-		public string Name { get; set; }
-		public int Score { get; set; }
-		public NameAndScoreSet(string name, int score)
-		{
-			this.Name = name;
-			this.Score = score;
-		}
-		public override string ToString()
-		{
-			return "Name: " + Name + "   Score: " + Score;
-		}
-	}
-
-	public static class Suffix
-	{
-		public static string json = ".json";
-		public static string txt = ".txt";
-	}
-
-	public class CustomJsonFile<T>
-	{
-		private FileUtilitiesBasic _fileUtilitiesBasic = new FileUtilitiesBasic();
-		public string FileName { get; set; }
-		public string DirPath { get; set; }
-		public List<T> ListData { get; set; }
-		private string jsonFormat;
-		public string JsonFormat
-		{
-			get { return _fileUtilitiesBasic.SerializeJsonDataReturnString<T>(this.ListData); }
-		}
-		private string pathFileNameAndSuffix;
-		public string PathFileNameAndSuffix
-		{
-			get { return this.DirPath + @"\" + this.FileName + Suffix.json; }
-		}
-	}
-}

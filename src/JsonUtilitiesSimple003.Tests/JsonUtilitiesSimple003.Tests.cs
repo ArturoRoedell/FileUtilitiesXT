@@ -1,6 +1,6 @@
 using Xunit.Abstractions;
 using Xunit;
-using static Types;
+using static FileUtilitiesXT.Types;
 
 namespace JsonUtilitiesSimple003.Tests;
 
@@ -65,13 +65,13 @@ public class FileUtilitiesBasicTest
 	public void Should_ConcatPathFileNameAndSuffix()
 	{
 		//Arrange
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		string path = @"C:\MyFolder";
 		string filename = "HighSocres";
 		string expected = @"C:\MyFolder\HighSocres.json";
 		
 		//Act
-		string actual = fileUtilitiesBasic.ConcatPathFileNameAndSuffix(path, filename, ".json");
+		string actual = fileUtilitiesXt.ConcatPathFileNameAndSuffix(path, filename, ".json");
 		
 		//Assert
 		Xunit.Assert.Equal(expected, actual);
@@ -83,14 +83,14 @@ public class FileUtilitiesBasicTest
 	public void Should_CheckIfFIleExistsThenCreateFile()
 	{
 		//Arrange
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		string FilePath =
 			@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003.Tests\" + 
 			@"TestCreationFile\UnicornSecrets.txt";
 		File.Delete(FilePath);
 		
 		//Act
-		fileUtilitiesBasic.CheckIfFileExistsThenCreateIt(FilePath);
+		fileUtilitiesXt.CheckIfFileExistsThenCreateIt(FilePath);
 		
 		//Assert
 		Xunit.Assert.True(File.Exists(FilePath));
@@ -100,7 +100,7 @@ public class FileUtilitiesBasicTest
 	public void Should_DeserializeJsonStringReturnList()
 	{
 		//Arrange
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		List<NameScoreDifficulty> expected = new List<NameScoreDifficulty>();
 		expected.Add(new NameScoreDifficulty("Arty", 481, _difficulty.Easy));
 		expected.Add(new NameScoreDifficulty("Jessica", 3454, _difficulty.Medium));
@@ -120,7 +120,7 @@ public class FileUtilitiesBasicTest
 ";
 		
 		//Act
-		List<NameScoreDifficulty> actual = fileUtilitiesBasic.DeserializeJsonStringReturnList<NameScoreDifficulty>(JsonRawData);
+		List<NameScoreDifficulty> actual = fileUtilitiesXt.DeserializeJsonStringReturnList<NameScoreDifficulty>(JsonRawData);
 		
 		//Assert
 		bool passed = true;
@@ -141,7 +141,7 @@ public class FileUtilitiesBasicTest
 	{
 		//Arrange
 		CustomJsonFile<NameScoreDifficulty> myJsonFile = new CustomJsonFile<NameScoreDifficulty>();
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
 		List<NameScoreDifficulty> listData = new List<NameScoreDifficulty>();
@@ -160,7 +160,7 @@ public class FileUtilitiesBasicTest
 ]
 ";
 		//Act
-		string actualJsonData = fileUtilitiesBasic.SerializeJsonDataReturnString(listData);
+		string actualJsonData = fileUtilitiesXt.SerializeJsonDataReturnString(listData);
 		
 		//Assert
 		Xunit.Assert.Matches(expectedJsonData,actualJsonData);
@@ -171,7 +171,7 @@ public class FileUtilitiesBasicTest
 	{
 		//Arrange
 		CustomJsonFile<NameScoreDifficulty> myJsonFile = new CustomJsonFile<NameScoreDifficulty>();
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
 		string expected = 
@@ -200,8 +200,8 @@ public class FileUtilitiesBasicTest
 ";
 		
 		//Act
-		fileUtilitiesBasic.CreateFileSortWriteToJson<NameScoreDifficulty>(myJsonFile, x => x.Score);
-		string actual = fileUtilitiesBasic.ReadFromFile(myJsonFile.PathFileNameAndSuffix);
+		fileUtilitiesXt.CreateFileSortWriteToJson<NameScoreDifficulty>(myJsonFile, x => x.Score);
+		string actual = fileUtilitiesXt.ReadFromFile(myJsonFile.PathFileNameAndSuffix);
 
 		//Assert
 		Xunit.Assert.Equal(expected,actual);
@@ -214,7 +214,7 @@ public class FileUtilitiesBasicTest
 	{
 		//Arrange
 		CustomJsonFile<NameScoreDifficulty> myJsonFile = new CustomJsonFile<NameScoreDifficulty>();
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
 		string testDirectory = Directory.GetCurrentDirectory() + "LoadFileToListThenSortAndCapTest";
@@ -237,7 +237,7 @@ public class FileUtilitiesBasicTest
 		
 		//Act
 		myJsonFile.ListData.Clear();
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameScoreDifficulty>(myJsonFile, x => x.Score, 3 );
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameScoreDifficulty>(myJsonFile, x => x.Score, 3 );
 		
 		//Assert
 		List<NameScoreDifficulty> expected = myJsonFile.ListData;
@@ -260,12 +260,12 @@ public class FileUtilitiesBasicTest
 	{
 		//Arrange
 		CustomJsonFile<NameScoreDifficulty> myJsonFile = new CustomJsonFile<NameScoreDifficulty>();
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
 		
 		//Act
-		fileUtilitiesBasic.SortScore<NameScoreDifficulty>(myJsonFile,x => x.Score);
+		fileUtilitiesXt.SortScore<NameScoreDifficulty>(myJsonFile,x => x.Score);
 		List<NameScoreDifficulty> actual = new List<NameScoreDifficulty>();
 		actual.Add(new NameScoreDifficulty("Cherry", 3454, _difficulty.Medium));
 		actual.Add(new NameScoreDifficulty("Arty", 865, _difficulty.Hard));

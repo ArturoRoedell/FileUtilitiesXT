@@ -1,6 +1,6 @@
-﻿using System;
-using static FileUtilitiesBasic;
-using static Types;
+﻿ using System;
+ using static FileUtilitiesXT.Types;
+ using static FileUtilitiesXT;
 
 /*NOTES: Scratch code when debuging
  Nothing should be referencing this area of the project.
@@ -22,18 +22,18 @@ public class Bebug01
 		myJsonFile.FileName = "artysdfsfFile";
 		myJsonFile.DirPath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest001";
 		myJsonFile.ListData = HighScoreList;
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		
 		Console.WriteLine("Get Prompt");
-		string getthisDirectory = fileUtilitiesBasic.PromptForRelativeDirectory(@"C:Pretend/Folder\\notTrue");
-
+		string getthisDirectory = fileUtilitiesXt.PromptForRelativeDirectory(@"C:Pretend/Folder\\notTrue");
+		
 		
 		return;
+	
 		
-		
-		
-		
-		fileUtilitiesBasic.CreateFileSortWriteToJson<NameAndScoreSet>(myJsonFile,x => x.Score);
+
+	
+		fileUtilitiesXt.CreateFileSortWriteToJson<NameAndScoreSet>(myJsonFile,x => x.Score);
 		
 		Console.WriteLine("\nBefore Clear\n");
 
@@ -41,9 +41,9 @@ public class Bebug01
 		{
 			Console.WriteLine(myJsonFile.ListData[i]);
 		}
-		
+
 		//myJsonFile.ListData.Clear();
-		
+
 		Console.WriteLine("\nAfter Clear\n");
 		
 		for (int i = 0; i < myJsonFile.ListData.Count(); i++)
@@ -52,7 +52,7 @@ public class Bebug01
 		}
 
 		Console.WriteLine("writeThis");
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
 		
 		Console.WriteLine("\nLoad From File\n");
 		for (int i = 0; i < myJsonFile.ListData.Count(); i++)
@@ -62,8 +62,8 @@ public class Bebug01
 
 		
 		return;
-		
-		
+
+
 		
 		
 		//HighScoreList.Clear();
@@ -87,7 +87,7 @@ public class Bebug01
 
 		Console.WriteLine("\n ScoresTogether In one\n");
 		
-		fileUtilitiesBasic.AppendToAndRetunList(HighScoreList, BetterScores);
+		fileUtilitiesXt.AppendToAndRetunList(HighScoreList, BetterScores);
 		
 		for (int i = 0; i < HighScoreList.Count(); i++)
 		{
@@ -103,7 +103,7 @@ public class Bebug01
 		}
 		Console.WriteLine("\n Reduce Items Below\n");
 		
-		fileUtilitiesBasic.ErraseOverflow(HighScoreList, 2 );
+		fileUtilitiesXt.ErraseOverflow(HighScoreList, 2 );
 		
 		for (int i = 0; i < HighScoreList.Count(); i++)
 		{
@@ -120,7 +120,7 @@ public class Bebug01
 
 		
 		
-		fileUtilitiesBasic.CreateFileSortWriteToJson<NameAndScoreSet>(myJsonFile, x => x.Score); //KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
+		fileUtilitiesXt.CreateFileSortWriteToJson<NameAndScoreSet>(myJsonFile, x => x.Score); //KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
 		
 		
 		Console.WriteLine(myJsonFile.JsonFormat);
@@ -131,12 +131,12 @@ public class Bebug01
 		Console.WriteLine(myJsonFile.JsonFormat);
 		Console.WriteLine("IsThere Something Aboveme");
 		Console.WriteLine("Repopulating The List Then Printing it");
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score); // KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score); // KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
 		
 		
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
 		Console.WriteLine(myJsonFile.JsonFormat);
 		
 
@@ -148,8 +148,8 @@ public class Bebug01
 		}
 		//foreach (var e in myJsonFile.ListData)
 		//{
-			//Console.WriteLine("Something Should Be here");
-			//Console.WriteLine(e.Name + " " + e.Score);
+		//Console.WriteLine("Something Should Be here");
+		//Console.WriteLine(e.Name + " " + e.Score);
 		//}
 		//Console.WriteLine(myJsonFile.JsonFormat);
 		List<NameAndScoreSet> newList = new List<NameAndScoreSet>(myJsonFile.ListData.OrderByDescending(set => set.Score));
@@ -175,12 +175,12 @@ public class Bebug01
 		Console.WriteLine(myJsonFile.JsonFormat);
 
 		return;
-		//fileUtilitiesBasic.CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
+		//fileUtilitiesXt.CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
 
 		
 		//FileUtilities.Prefabs.CreateFileSortWriteToJson.Begin<NameAndScoreSet>(myJsonFile, x => x.Score); // TODO - This works Great Need To Create a unit Test. except not sorted
 		
-		fileUtilitiesBasic.SerializeJsonDataReturnString<NameAndScoreSet>(myJsonFile.ListData);
+		fileUtilitiesXt.SerializeJsonDataReturnString<NameAndScoreSet>(myJsonFile.ListData);
 		
 		
 		Console.WriteLine("Deleting The list Shold Be empty");
@@ -190,7 +190,7 @@ public class Bebug01
 		
 		
 		Console.WriteLine("Repopulating The List Then Printing it");
-		fileUtilitiesBasic.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score);
 		
 		Console.WriteLine(myJsonFile.JsonFormat);
 		foreach (var e in myJsonFile.ListData)
@@ -212,7 +212,7 @@ public class Bebug01
 		Console.WriteLine("Is there Something Here?\n");
 
 		myJsonFile.ListData =
-			fileUtilitiesBasic.DeserializeJsonStringReturnList<NameAndScoreSet>(
+			fileUtilitiesXt.DeserializeJsonStringReturnList<NameAndScoreSet>(
 				myJsonFile.PathFileNameAndSuffix);
 		
 
@@ -230,7 +230,7 @@ public class Bebug01
 
 
 	}
-
+	
 	public static void AddNamesAndScoresToList(String name, int score, List<NameAndScoreSet> list)
 	{
 		list.Add(new NameAndScoreSet(name, score));
@@ -257,7 +257,7 @@ public class TestinArea
 	public static void SeeTestData()
 	{
 		string JsonRawData =
-				@"[
+			@"[
   {
     ""Name"": ""a"",
     ""Score"": 1
@@ -272,10 +272,10 @@ public class TestinArea
 		expectedList.Add(new NameAndScoreSet("a", 1));
 		expectedList.Add(new NameAndScoreSet("b", 2));
 
-		FileUtilitiesBasic fileUtilitiesBasic = new FileUtilitiesBasic();
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		
 		List<NameAndScoreSet> actualList =
-			fileUtilitiesBasic.DeserializeJsonStringReturnList<NameAndScoreSet>(JsonRawData);
+			fileUtilitiesXt.DeserializeJsonStringReturnList<NameAndScoreSet>(JsonRawData);
 		
 
 		Boolean passed = expectedList == actualList ? true : false;
