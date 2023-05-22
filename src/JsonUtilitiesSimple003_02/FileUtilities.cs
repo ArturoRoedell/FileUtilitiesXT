@@ -51,11 +51,12 @@ public class FileUtilitiesXT
 		myJsonFile.ListData = transferList;
 	}
 
-	public  void CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp)
+	public  void CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 	{
 		TestPathAndCreateFolder(myJsonFile.DirPath);
 		CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
 		SortScore(myJsonFile,getProp);
+		ErraseOverflow<T>(myJsonFile.ListData, capLimit);
 		WriteToFile(myJsonFile.PathFileNameAndSuffix, SerializeJsonDataReturnString(myJsonFile.ListData));
 	}
 		
@@ -226,6 +227,11 @@ public class FileUtilitiesXT
 			private FileUtilitiesXT _fileUtilitiesXt = new FileUtilitiesXT();
 			public string FileName { get; set; }
 			public string DirPath { get; set; }
+			private Type listType;
+			public Type ListType
+			{
+				get { return typeof(T); }
+			}
 			public List<T> ListData { get; set; }
 			private string jsonFormat;
 			public string JsonFormat

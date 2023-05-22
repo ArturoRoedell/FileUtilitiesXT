@@ -32,7 +32,7 @@ public class Bebug01
 		
 		
 		
-		fileUtilitiesXt.CreateFileSortWriteToJson<NameAndScoreSet>(myJsonFile, x => x.Score); //KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
+		fileUtilitiesXt.CreateFileSortWriteToJson(myJsonFile, x => x.Score); //KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
 		
 		
 		Console.WriteLine(myJsonFile.JsonFormat);
@@ -43,10 +43,15 @@ public class Bebug01
 		Console.WriteLine(myJsonFile.JsonFormat);
 		Console.WriteLine("IsThere Something Aboveme");
 		Console.WriteLine("Repopulating The List Then Printing it");
-		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score); 
+		fileUtilitiesXt.LoadFileToListThenSortAndCap(myJsonFile, x => x.Score); 
+		
+		Console.WriteLine(myJsonFile.JsonFormat);
 		
 		
 		return;
+		
+		
+		
 		myJsonFile.FileName = "Helicopter Scores";
 		string CurrentDir = Directory.GetCurrentDirectory();
 		myJsonFile.DirPath = CurrentDir + @"\HighScoresFolder";
