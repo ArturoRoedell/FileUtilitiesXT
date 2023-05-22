@@ -13,6 +13,11 @@ public class Bebug01
 	public static void Begin()
 	{
 
+
+
+		//Directory.CreateDirectory(@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest002");
+
+
 		List<NameAndScoreSet> HighScoreList = new List<NameAndScoreSet>();
 		AddNamesAndScoresToList("Arty", 481, HighScoreList);
 		AddNamesAndScoresToList("Cherry", 3454, HighScoreList);
@@ -24,10 +29,56 @@ public class Bebug01
 		myJsonFile.ListData = HighScoreList;
 		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		
-		Console.WriteLine("Get Prompt");
-		string getthisDirectory = fileUtilitiesXt.PromptForRelativeDirectory(@"C:Pretend/Folder\\notTrue");
 		
 		
+		
+		fileUtilitiesXt.CreateFileSortWriteToJson<NameAndScoreSet>(myJsonFile, x => x.Score); //KEY: .Begin<{type}>(myJsonFile, x => x.{property}) 
+		
+		
+		Console.WriteLine(myJsonFile.JsonFormat);
+		
+
+		Console.WriteLine("Deleting The list Shold Be empty");
+		myJsonFile.ListData.Clear();
+		Console.WriteLine(myJsonFile.JsonFormat);
+		Console.WriteLine("IsThere Something Aboveme");
+		Console.WriteLine("Repopulating The List Then Printing it");
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameAndScoreSet>(myJsonFile, x => x.Score); 
+		
+		
+		return;
+		myJsonFile.FileName = "Helicopter Scores";
+		string CurrentDir = Directory.GetCurrentDirectory();
+		myJsonFile.DirPath = CurrentDir + @"\HighScoresFolder";
+		Console.WriteLine(Directory.Exists(myJsonFile.DirPath));
+		Console.WriteLine(myJsonFile.DirPath);
+		fileUtilitiesXt.TestPathAndCreateFolder(myJsonFile.DirPath);
+		Console.WriteLine(Directory.Exists(myJsonFile.DirPath));
+		
+		
+		
+		
+		return;
+		
+		
+		
+		
+		
+		Console.WriteLine("Append String");
+		
+		string input = @"example string\"; // Replace with your input string
+
+		if (!input.EndsWith("\\"))
+		{
+			input += "\\";
+		}
+
+		Console.WriteLine("Modified string: " + input);
+		
+		
+		//string getthisDirectory = fileUtilitiesXt.PromptForRelativeDirectory(@"C:Pretend/Folder\\notTrue");
+		
+		//fileUtilitiesXt.TestPathAndCreateFolder(@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\AnotherTest\");
 		return;
 	
 		

@@ -49,3 +49,11 @@ public class  selectionTools
 		return BoolYes;
 	}
 }
+
+// public class VirtualInput
+// {
+// 	public virtual string ReadLine()
+// 	{
+// 		return Console.ReadLine();
+// 	}
+// }

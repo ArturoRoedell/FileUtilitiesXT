@@ -217,7 +217,7 @@ public class FileUtilitiesBasicTest
 		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
-		string testDirectory = Directory.GetCurrentDirectory() + "LoadFileToListThenSortAndCapTest";
+		string testDirectory = Directory.GetCurrentDirectory() + @"\" +"LoadFileToListThenSortAndCapTest";
 		string fileName = "Should_LoadFileToListThenSortAndCapTestFile";
 		myJsonFile.FileName = fileName;
 		myJsonFile.DirPath = testDirectory;

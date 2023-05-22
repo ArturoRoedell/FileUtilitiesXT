@@ -32,6 +32,7 @@ public class FileUtilitiesXT
 {
 	public  void LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 	{
+		TestPathAndCreateFolder(myJsonFile.DirPath);
 		CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
 		string fileContent = ReadFromFile(myJsonFile.PathFileNameAndSuffix);
 		List<T> tempTransferList = new List<T>();
@@ -40,11 +41,8 @@ public class FileUtilitiesXT
 		{
 			myJsonFile.ListData = AppendToAndRetunList<T>(myJsonFile.ListData,tempTransferList);
 		}
-		Console.WriteLine(myJsonFile.ListData.Count);
 		SortScore(myJsonFile,getProp);
-		Console.WriteLine("Current Number Of items" + myJsonFile.ListData.Count);
 		ErraseOverflow<T>(myJsonFile.ListData, capLimit);
-		Console.WriteLine("Current Number Of items" + myJsonFile.ListData.Count);
 	}
 
 	public  void SortScore<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
@@ -55,7 +53,7 @@ public class FileUtilitiesXT
 
 	public  void CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp)
 	{
-		TestPathAndCreateFolder(myJsonFile.PathFileNameAndSuffix);
+		TestPathAndCreateFolder(myJsonFile.DirPath);
 		CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
 		SortScore(myJsonFile,getProp);
 		WriteToFile(myJsonFile.PathFileNameAndSuffix, SerializeJsonDataReturnString(myJsonFile.ListData));
@@ -104,7 +102,6 @@ public class FileUtilitiesXT
 		{
 			listData.RemoveRange(totalCap, remove);
 		}
-		Console.WriteLine("Current Number Of items" + listData.Count);
 	}
 		
 	public  string ConcatPathFileNameAndSuffix(string path, string name, string suffix)
@@ -122,10 +119,10 @@ public class FileUtilitiesXT
 
 	public  void TestPathAndCreateFolder(string dirpath)
 	{
-		try
+		if (!(Directory.Exists(dirpath)))
 		{
-			Directory.CreateDirectory(Path.GetDirectoryName(dirpath));
-		}finally {}
+			Directory.CreateDirectory(dirpath);
+		}
 	}
 		
 	public  string ReadFromFile(string filepath)
@@ -198,9 +195,9 @@ public class FileUtilitiesXT
 				listDataOriginal.Add(listDataToAppend[i]);
 			}
 		}
-		Console.WriteLine(listDataOriginal.Count);
 		return listDataOriginal;
 	}
+	
 	public class Types
 	{ 
 		public class NameAndScoreSet
@@ -242,6 +239,5 @@ public class FileUtilitiesXT
 			}
 		}
 	}
-		
 }
 
