@@ -1,4 +1,5 @@
 ﻿ using System;
+ using System.IO;
  using static FileUtilitiesXT.Types;
  using static FileUtilitiesXT;
 
@@ -15,6 +16,11 @@ public class Bebug01
 
 
 
+		string filepath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest002\UnicornSerects.dll";
+		Console.WriteLine(Path.GetDirectoryName(filepath));
+
+		return;
+		
 		//Directory.CreateDirectory(@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest002");
 
 

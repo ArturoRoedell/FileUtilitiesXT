@@ -9,13 +9,13 @@ using System.Net.Mime;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using LittleHelpersLibrary;
 using static FileUtilitiesXT.Types;
 using static FileUtilitiesXT;
 
 /* TASKS:
 MAINTASKONGOING: PIPEDREAM: Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
 MAINTASK: Finish adding Unit Tests ...(Inprogress)...
-MAINTASK: Add Version Author and Name to Project fileProperties
 TODO - PIPEDREAM: Add feature to change csv file to json file if Value names are given. example SCORE, NAME...
 todo - ...Or tke Form Header information.
 TODO - PIPEDREAM: add a fancy input system with that asks you questions which can be used for any program
@@ -43,13 +43,13 @@ public class FileUtilitiesXT
 		}
 		SortScore(myJsonFile,getProp);
 		ErraseOverflow<T>(myJsonFile.ListData, capLimit);
-	}
+	}//TestExixsts
 
 	public  void SortScore<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
 	{
 		List<T> transferList =  new List<T>(myJsonFile.ListData.OrderByDescending(set => getProp(set)));
 		myJsonFile.ListData = transferList;
-	}
+	}//TestExixsts
 
 	public  void CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 	{
@@ -58,7 +58,7 @@ public class FileUtilitiesXT
 		SortScore(myJsonFile,getProp);
 		ErraseOverflow<T>(myJsonFile.ListData, capLimit);
 		WriteToFile(myJsonFile.PathFileNameAndSuffix, SerializeJsonDataReturnString(myJsonFile.ListData));
-	}
+	}//TestExixsts
 		
 	public  List<T> DeserializeJsonStringReturnList<T>(string fileContent)
 	{
@@ -72,7 +72,7 @@ public class FileUtilitiesXT
 			Console.WriteLine("Not A json file");
 		}
 		return FileDataList;
-	}
+	}//TestExixsts
 
 	public  string SerializeJsonDataReturnString<T>(List<T> listData)
 	{
@@ -81,8 +81,8 @@ public class FileUtilitiesXT
 			listData, new JsonSerializerOptions() { WriteIndented = true }
 		);
 
-		return jsonString;
-	}
+		return jsonString + "\n";
+	}//TestExixsts
 		
 	public  string PromptForRelativeDirectory
 		(string pathReplace = null, string repeatString = "Would You like to use this relative directory folder shown above?")
@@ -109,7 +109,7 @@ public class FileUtilitiesXT
 	{
 		string concatString;
 		return concatString = path + @"\" + name + suffix;
-	}
+	}//TestExixsts
 
 	public  void CreateFile(string filePath, string name)
 	{
@@ -156,13 +156,13 @@ public class FileUtilitiesXT
 			FileStream fileStream = File.Create(filepath);
 			fileStream.Close();
 		}
-	}
+	}//TestExixsts
 		
 	public  void WriteToFile(string filePath, string jsonString)
 	{
 		using (StreamWriter streamWriter = new StreamWriter(filePath))
 		{
-			streamWriter.WriteLine(jsonString);
+			streamWriter.Write(jsonString);
 			streamWriter.Close();
 		}
 	}
@@ -171,7 +171,7 @@ public class FileUtilitiesXT
 	{
 		using(StreamWriter streamWriter = File.AppendText(filePath))
 		{
-			streamWriter.WriteLine(contents);
+			streamWriter.Write(contents);
 			streamWriter.Close();
 		}
 			
@@ -197,6 +197,13 @@ public class FileUtilitiesXT
 			}
 		}
 		return listDataOriginal;
+	}
+
+	public void FastCreateWriteFile(string filepath, string anyString)
+	{
+		TestPathAndCreateFolder(Path.GetDirectoryName(filepath));
+		CheckIfFileExistsThenCreateIt(filepath);
+		WriteToFile(filepath, anyString);
 	}
 	
 	public class Types

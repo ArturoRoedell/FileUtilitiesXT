@@ -54,7 +54,7 @@ public class NameScoreDifficulty
 
 public class FileUtilitiesBasicTest
 {
-	private readonly ITestOutputHelper output; //Bp / *  This Line Lets me output to the unit test window to debug the the test
+	private readonly ITestOutputHelper output; //Boiler Plate / *  This Line Lets me output to the unit test window to debug the the test
 
 	public FileUtilitiesBasicTest(ITestOutputHelper output)
 	{
@@ -196,17 +196,21 @@ public class FileUtilitiesBasicTest
     ""Name"": ""Jessica"",
     ""Score"": 462
   }
-]
-";
+]" + "\n";
 		
 		//Act
 		fileUtilitiesXt.CreateFileSortWriteToJson<NameScoreDifficulty>(myJsonFile, x => x.Score);
 		string actual = fileUtilitiesXt.ReadFromFile(myJsonFile.PathFileNameAndSuffix);
 
 		//Assert
-		Xunit.Assert.Equal(expected,actual);
+		
+		output.WriteLine("Start Actual:\n" + actual);
+		output.WriteLine("Start Expected:\n" + expected);
+		
 		bool passed = expected == actual;
 		output.WriteLine("Should_CreateFileSortWriteToJson passed:" + passed.ToString());
+
+		Xunit.Assert.Equal(expected,actual);
 	}
 
 	[Fact]
@@ -280,5 +284,83 @@ public class FileUtilitiesBasicTest
 			{ passed = false;}
 		}
 		Xunit.Assert.True(passed);
+	}
+
+	[Fact]
+	public void Should_ErraseOverflow()
+	{
+		//Arrange
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
+		List<char> ExpectedList = new List<char>();
+		ExpectedList.Add('a');
+		ExpectedList.Add('b');
+		ExpectedList.Add('c');
+		ExpectedList.Add('d');
+		List<char> ActualList = new List<char>();
+		ActualList.Add('a');
+		ActualList.Add('b');
+		//Act
+		fileUtilitiesXt.ErraseOverflow(ExpectedList, 2);
+		//Assert
+		Assert.Equal(ExpectedList.Count, ActualList.Count);
+	}
+
+	[Fact]
+	public void Should_AppendToFile()
+	{
+		//Arrange
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
+		
+		string original = "1 2 3 4 ", appendThis = "5 6";
+		string ActualFilepath = Directory.GetCurrentDirectory() + "\\TestAppendtoFileActual.txt";
+		File.Delete(ActualFilepath);
+		fileUtilitiesXt.FastCreateWriteFile(ActualFilepath,original);
+
+		string expected = "1 2 3 4 5 6";
+		string ExpectedFilepath = Directory.GetCurrentDirectory() + "\\TestAppendtoFileExpected.txt";
+		fileUtilitiesXt.FastCreateWriteFile(ExpectedFilepath,expected);
+		
+		//Act
+		fileUtilitiesXt.AppendToFile(ActualFilepath, appendThis);
+		
+		//Assert
+		bool passed = LittleHelpersLibrary.Comparison.FileCompare(ExpectedFilepath, ActualFilepath);
+		Assert.True(passed);
+	}
+
+	[Fact]
+	public void WIP_Should_ReadFromFile()
+	{
+		//Arrange
+
+		//Act
+
+		//Assert
+
+		Assert.True(false);
+	}
+
+	[Fact]
+	public void WIP_Should_AppendToAndRetunList()
+	{
+		//Arrange
+
+		//Act
+
+		//Assert
+
+		Assert.True(false);
+	}
+
+	[Fact]
+	public void WIP_Should_PromptForRelativeDirectory()
+	{
+		//Arrange
+
+		//Act
+
+		//Assert
+
+		Assert.True(false);
 	}
 }
