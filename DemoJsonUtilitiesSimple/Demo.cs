@@ -2,28 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using static FileUtilitiesXT.Types;
-using static BoringStuff;
+using static OnScreen;
 using LittleHelpersLibrary;
 
 class Start
 {
 	public static void Main()
 	{
+		//Setup
 		CustomJsonFile<NameAndScoreSet> myJsonFile = new CustomJsonFile<NameAndScoreSet>();
 		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		myJsonFile.FileName = "Dice Game Scores";
 		myJsonFile.DirPath = Directory.GetCurrentDirectory() + @"\HighScoresFolder";
-		fileUtilitiesXt.LoadFileToListThenSortAndCap(myJsonFile, x => x.Score);
+		fileUtilitiesXt.LoadFileToListThenSortAndCap(myJsonFile, x => x.Score);// Key Feature for DLL
+		
 		bool play = true;
-		while (play)
+		while (play) // Main Loop
 		{
-			// "### Three One-Hundred sided dice Game ###"
-			Game game = new Game();
-			int score = game.Begin();
-			myJsonFile.ListData = SudoGUI_HighScore(myJsonFile.ListData, score);
-			fileUtilitiesXt.CreateFileSortWriteToJson(myJsonFile, x => x.Score);
+			DiceGame diceGame = new DiceGame();
+			int score = diceGame.Begin(); // KeyFeature ;Starts Game Then Returns Score from Game
+			myJsonFile.ListData = SudoGUI_HighScore(myJsonFile.ListData, score); //Key Feature
+			fileUtilitiesXt.CreateFileSortWriteToJson(myJsonFile, x => x.Score); // Key Feature for DLL
 			play = selectionTools.YesNoSelection("\n\nDo You Want To Continue Playing?");
 		}
+		
 		bool clearHighScores = selectionTools.YesNoSelection("Do You Want To Clear High Scores?");
 		if (clearHighScores)
 		{
@@ -36,7 +38,7 @@ class Start
 	}
 }
 
-class Game
+class DiceGame
 {
 	Random rand = new Random(Guid.NewGuid().GetHashCode());
 	public int Begin()
@@ -53,7 +55,7 @@ class Game
 			Console.WriteLine("Your roll die Two: " + scoreTwo);
 			Console.WriteLine("Your roll die Three: " + scoreThree);
 			score = scoreOne + scoreTwo + scoreThree;
-			Console.WriteLine("Your Current Score: " + score);
+			Console.WriteLine("\nYour Current Score: " + score);
 			roll = selectionTools.YesNoSelection("Do You Want To Re-Roll?");
 			Console.Clear();
 		}
@@ -61,11 +63,12 @@ class Game
 	}
 }
 
-class BoringStuff
+class OnScreen
 {
 	public static List<NameAndScoreSet> SudoGUI_HighScore(List<NameAndScoreSet> HighScoreList, int score)
 	{
-		Console.Write("\n\nEnter Player Name: ");
+		Console.WriteLine("Your Score: " + score);
+		Console.Write("\nEnter Player Name: ");
 		Console.CursorVisible = true;
 		string playerName = Console.ReadLine();
 		Console.CursorVisible = false;
