@@ -1,4 +1,4 @@
-#### Read write Json files and text files with ease
+### Read write Json files and text files with ease
 
 This is a small simple c# library to make to make working wih json files a  bit easier to work with. Also reduces the lines of code to read and write custom files text csv etc.
 
@@ -9,41 +9,43 @@ Also `FastReadFile()` returns text that is saved in the default file. The defaul
 Also for Json Files it is now simpler to serialize and save files with fewer lines of code using `CustomJsonFile` object,
 `LoadFileToListThenSortAndCap` method and the `CreateFileSortWriteToJson` method as seen in the demo file.
 
-### List of Methods
-FileUtilitiesXT needs to be instantiated to use the methods like this `FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();`. The following is the current list of methods that can be used:
 
-LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
+FileUtilitiesXT needs to be instantiated to use the methods like this `FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();`. The following is the current list of methods that can be used.
 
-SortScore<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
+### List of Methods:
 
-CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
+`LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)`
 
-List<T> DeserializeJsonStringReturnList<T>(string fileContent)
+`SortScore<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )`
 
-string SerializeJsonDataReturnString<T>(List<T> listData)
+`CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)`
 
-string PromptForRelativeDirectory(string pathReplace = null, string repeatString = "Would You like to use this relative directory folder shown above?")
+`List<T> DeserializeJsonStringReturnList<T>(string fileContent)`
 
-ErraseOverflow <T>(List<T> listData, int totalCap)
+`string SerializeJsonDataReturnString<T>(List<T> listData)`
 
-ConcatPathFileNameAndSuffix(string path, string name, string suffix)
+`string PromptForRelativeDirectory(string pathReplace = null, string repeatString = "Would You like to use this relative directory folder shown above?")`
 
-CreateFile(string filePath, string name)
+`ErraseOverflow <T>(List<T> listData, int totalCap)`
 
-TestPathAndCreateFolder(string dirpath)
+`ConcatPathFileNameAndSuffix(string path, string name, string suffix)`
 
-ReadFromFile(string filepath)
+`CreateFile(string filePath, string name)`
 
-CheckIfFileExistsThenCreateIt(string filepath)
+`TestPathAndCreateFolder(string dirpath)`
 
-WriteToFile(string filePath, string jsonString)
+`ReadFromFile(string filepath)`
 
-AppendToFile(string filePath, string contents)
+`CheckIfFileExistsThenCreateIt(string filepath)`
 
-List<T> AppendToAndRetunList<T>(List<T> listDataOriginal, List<T> listDataToAppend)
+`WriteToFile(string filePath, string jsonString)`
 
-string FastFilePath(String fileName = defaultfileName, string fileDirectory = " ")
+`AppendToFile(string filePath, string contents)`
 
-FastCreateWriteFile(string fileContent, string filepath = " ")
+`List<T> AppendToAndRetunList<T>(List<T> listDataOriginal, List<T> listDataToAppend)`
 
-string FastReadFile()
+`string FastFilePath(String fileName = defaultfileName, string fileDirectory = " ")`
+
+`FastCreateWriteFile(string fileContent, string filepath = " ")`
+
+`string FastReadFile()`
