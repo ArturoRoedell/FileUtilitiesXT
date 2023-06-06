@@ -55,7 +55,7 @@ public class NameScoreDifficulty
 
 class Program
 {
-	static void Main()
+	public static void Main()
 	{
 		DebugTests.Bebug01.Begin();
 		//Should_LoadFileToListThenSortAndCap();

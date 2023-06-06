@@ -36,6 +36,7 @@ public class FileUtilitiesXT
 		CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
 		string fileContent = ReadFromFile(myJsonFile.PathFileNameAndSuffix);
 		List<T> tempTransferList = new List<T>();
+		string checknull = fileContent; // Debug Erase Whole Line;
 		tempTransferList = DeserializeJsonStringReturnList<T>(fileContent);
 		if (!(tempTransferList == null))
 		{
@@ -132,7 +133,7 @@ public class FileUtilitiesXT
 		{
 			return null;
 		};
-		string contents = "";
+		string contents = null;
 		var fileInfo = new FileInfo(filepath);
 		if (fileInfo.Length == 0)
 		{
@@ -142,7 +143,6 @@ public class FileUtilitiesXT
 		{
 			contents = File.ReadAllText(filepath);
 		}
-
 		return contents;
 	}
 		
