@@ -16,11 +16,23 @@ class Start
 		myJsonFile.DirPath = Directory.GetCurrentDirectory() + @"\HighScoresFolder";
 		fileUtilitiesXt.LoadFileToListThenSortAndCap(myJsonFile, x => x.Score);// Key Feature for DLL
 		
+		bool simple = selectionTools.YesNoSelection("\n\nDo You Want to enter numbers quickly. Press N to play dice game?");
+		
 		bool play = true;
 		while (play) // Main Loop
 		{
-			DiceGame diceGame = new DiceGame();
-			int score = diceGame.Begin(); // KeyFeature ;Starts Game Then Returns Score from Game
+			int score;
+			//bool simple = selectionTools.YesNoSelection("\n\nDo You Want to enter numbers quickly. Press N to play dice game?");
+			if (simple)
+			{
+				SimpleGame simpleGame = new SimpleGame();
+				score = simpleGame.Begin();
+			}
+			else
+			{
+				DiceGame diceGame = new DiceGame();
+				score = diceGame.Begin(); // KeyFeature ;Starts Game Then Returns Score from Game
+			}
 			myJsonFile.ListData = SudoGUI_HighScore(myJsonFile.ListData, score); //Key Feature
 			fileUtilitiesXt.CreateFileSortWriteToJson(myJsonFile, x => x.Score); // Key Feature for DLL
 			play = selectionTools.YesNoSelection("\n\nDo You Want To Continue Playing?");
@@ -59,6 +71,16 @@ class DiceGame
 			roll = selectionTools.YesNoSelection("Do You Want To Re-Roll?");
 			Console.Clear();
 		}
+		return score;
+	}
+}
+
+class SimpleGame
+{
+	public int Begin()
+	{
+		Console.WriteLine("Enter a score below: ");
+		int score = Convert.ToInt32(Console.ReadLine());
 		return score;
 	}
 }

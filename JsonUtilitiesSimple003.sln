@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugToolsForJsonUtilities"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonUtilitiesSimple003_02", "src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02.csproj", "{2AF2686B-C0B2-4870-9903-B2742EFA9F46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoJsonUtilitiesSimple", "DemoJsonUtilitiesSimple\DemoJsonUtilitiesSimple.csproj", "{E02C3807-C4C7-4D1A-B455-91FCBEB28837}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoJsonUtilitiesSimple", "src\DemoJsonUtilitiesSimple\DemoJsonUtilitiesSimple.csproj", "{E02C3807-C4C7-4D1A-B455-91FCBEB28837}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

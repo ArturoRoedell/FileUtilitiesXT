@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <Reference Include="FileUtilitiesXT.Library">
-        <HintPath>..\src\JsonUtilitiesSimple003_02\bin\Debug\net6.0\FileUtilitiesXT.Library.dll</HintPath>
+        <HintPath>..\JsonUtilitiesSimple003_02\bin\Debug\net6.0\FileUtilitiesXT.Library.dll</HintPath>
       </Reference>
     </ItemGroup>
 
