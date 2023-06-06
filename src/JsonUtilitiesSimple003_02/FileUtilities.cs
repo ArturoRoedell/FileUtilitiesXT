@@ -30,6 +30,8 @@ TODO - PIPEDREAM: Create a Demo Project to go along with Dll called JsonUtilitie
 
 public class FileUtilitiesXT
 {
+	const string  defaultfileName = "DefaultSaveFile.sav";
+
 	public  void LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 	{
 		TestPathAndCreateFolder(myJsonFile.DirPath);
@@ -199,11 +201,32 @@ public class FileUtilitiesXT
 		return listDataOriginal;
 	}
 
-	public void FastCreateWriteFile(string filepath, string anyString)
+	public string FastFilePath(String fileName = defaultfileName, string fileDirectory = " ")
 	{
+		string filePath;
+		if (fileDirectory == " ")
+		{
+			fileDirectory = Directory.GetCurrentDirectory();
+		}
+		return filePath = fileDirectory + @"\" + fileName;
+	}
+	
+	public void FastCreateWriteFile(string fileContent, string filepath = " ")
+	{
+		if (filepath == " ")
+		{
+			filepath = FastFilePath();
+		}
 		TestPathAndCreateFolder(Path.GetDirectoryName(filepath));
 		CheckIfFileExistsThenCreateIt(filepath);
-		WriteToFile(filepath, anyString);
+		WriteToFile(filepath, fileContent);
+	}
+
+	public string FastReadFile() //AKA DefaultFileSaveSystem
+	{
+		string filePath = Directory.GetCurrentDirectory() + @"\" + defaultfileName;
+		string fileContent = ReadFromFile(filePath);
+		return fileContent;
 	}
 	
 	public class Types

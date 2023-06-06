@@ -1,5 +1,6 @@
 ﻿ using System;
  using System.IO;
+ using System.Reflection;
  using static FileUtilitiesXT.Types;
  using static FileUtilitiesXT;
 
@@ -13,8 +14,32 @@ public class Bebug01
 {
 	public static void Begin()
 	{
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
+		
+		// fileUtilitiesXt.FastCreateWriteFile("Test This code create File anything");//full filepath then string content is required
+		// string filecontent = fileUtilitiesXt.FastReadFile();
+		// Console.WriteLine(filecontent);
 
-
+		MethodInfo[] mInfos = typeof(FileUtilitiesXT).GetMethods(BindingFlags.Public);
+		
+		
+		Array.Sort(mInfos,
+			delegate(MethodInfo methodInfo1, MethodInfo methodInfo2)
+			{ 
+				return methodInfo1.Name.CompareTo(methodInfo2.Name); 
+			});
+		
+		foreach (MethodInfo mInfo in mInfos)
+		{
+			Console.WriteLine(mInfo.Name);
+		}
+		// foreach(var e in mInfos)
+		// {
+		// 	Console.WriteLine(Convert.ToString(e));
+		// }
+		
+		Console.ReadLine();
+		return;
 
 		string filepath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest002\UnicornSerects.dll";
 		Console.WriteLine(Path.GetDirectoryName(filepath));
@@ -33,7 +58,7 @@ public class Bebug01
 		myJsonFile.FileName = "artysdfsfFile";
 		myJsonFile.DirPath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest001";
 		myJsonFile.ListData = HighScoreList;
-		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
+		//FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		
 		
 		

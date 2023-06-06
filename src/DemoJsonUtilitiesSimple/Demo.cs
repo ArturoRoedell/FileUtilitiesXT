@@ -33,6 +33,7 @@ class Start
 				DiceGame diceGame = new DiceGame();
 				score = diceGame.Begin(); // KeyFeature ;Starts Game Then Returns Score from Game
 			}
+			
 			myJsonFile.ListData = SudoGUI_HighScore(myJsonFile.ListData, score); //Key Feature
 			fileUtilitiesXt.CreateFileSortWriteToJson(myJsonFile, x => x.Score); // Key Feature for DLL
 			play = selectionTools.YesNoSelection("\n\nDo You Want To Continue Playing?");

@@ -314,11 +314,11 @@ public class FileUtilitiesBasicTest
 		string original = "1 2 3 4 ", appendThis = "5 6";
 		string ActualFilepath = Directory.GetCurrentDirectory() + "\\TestAppendtoFileActual.txt";
 		File.Delete(ActualFilepath);
-		fileUtilitiesXt.FastCreateWriteFile(ActualFilepath,original);
+		fileUtilitiesXt.FastCreateWriteFile(original, ActualFilepath);
 
 		string expected = "1 2 3 4 5 6";
 		string ExpectedFilepath = Directory.GetCurrentDirectory() + "\\TestAppendtoFileExpected.txt";
-		fileUtilitiesXt.FastCreateWriteFile(ExpectedFilepath,expected);
+		fileUtilitiesXt.FastCreateWriteFile(expected, ExpectedFilepath);
 		
 		//Act
 		fileUtilitiesXt.AppendToFile(ActualFilepath, appendThis);
