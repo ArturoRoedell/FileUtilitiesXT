@@ -14,8 +14,8 @@ FileUtilitiesXT needs to be instantiated to use the methods like this `FileUtili
 
 
 
->### :warning: Important:
->It is convenient to serialize from a list before you write to json file to avoid the issues with
+>### Important:
+It is convenient to serialize from a list before you write to json file to avoid the issues with
 json comma separations and bracket begining and ending. In short do not use `AppendToFile` for json files.
 To append to json file here are my suggested steps: read file, deserialize,
 add data to list, serialize, and finally over-write the file.
