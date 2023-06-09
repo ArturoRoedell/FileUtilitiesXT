@@ -6,8 +6,8 @@
         <Nullable>enable</Nullable>
         <AssemblyName>FileUtilitiesXT.Library</AssemblyName>
         <Company>Arturo Roedell</Company>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <FileVersion>1.0.0.0</FileVersion>
+        <AssemblyVersion>1.0.0.1</AssemblyVersion>
+        <FileVersion>1.0.0.1</FileVersion>
         <PackageId>ArturoRoedell.Util.FileUtilitiesXT</PackageId>
         <Title>FileUtilitiesXT</Title>
         <Authors>Arturo Roedll</Authors>

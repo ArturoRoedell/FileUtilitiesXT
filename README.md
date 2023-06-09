@@ -1,4 +1,4 @@
-### Read write Json files and text files with ease
+### Read write Json files and text files with ease Version 1.0.0.1
 
 This is a small simple c# library to make to make working wih json files a  bit easier to work with. Also reduces the lines of code to read and write custom files text csv etc.
 
@@ -12,7 +12,17 @@ Also for Json Files it is now simpler to serialize and save files with fewer lin
 
 FileUtilitiesXT needs to be instantiated to use the methods like this `FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();`. The following is the current list of methods that can be used.
 
-### List of Methods:
+
+
+>### :warning: Important:
+>It is convenient to serialize from a list before you write to json file to avoid the issues with
+json comma separations and bracket begining and ending. In short do not use `AppendToFile` for json files.
+To append to json file here are my suggested steps: read file, deserialize,
+add data to list, serialize, and finally over-write the file.
+
+
+
+### List of Methods for `FileUtilitiesXT`:
 
 `LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)`
 
@@ -49,3 +59,18 @@ FileUtilitiesXT needs to be instantiated to use the methods like this `FileUtili
 `FastCreateWriteFile(string fileContent, string filepath = " ")`
 
 `string FastReadFile()`
+
+### List of Methods for `LittleHelpersLibrary`:
+
+
+`using LittleHelpersLibrary;`
+
+
+`static bool YesNoSelection(string ChoiceAsk)`
+Example
+`play = selectionTools.YesNoSelection("\n\nDo You Want To Continue Playing?");`
+
+`static bool FileCompare(string file1, string file2)`
+Exapmple
+`bool passed = Comparison.FileCompare(ExpectedFilepath, ActualFilepath);`
+
