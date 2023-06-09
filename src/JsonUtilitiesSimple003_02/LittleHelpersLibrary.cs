@@ -34,7 +34,6 @@ public class  selectionTools
 		bool BoolYes = true;
 		do{
 			string repeatString = ChoiceAsk + "\n Y /  N";
-			//int choice = CaseSelect(repeatString);
 			string choice = CaseSelect(repeatString);
 			switch (choice)
 			{
@@ -86,11 +85,3 @@ public class Comparison
 		return ((file1byte - file2byte) == 0);
 	}
 }
-
-// public class VirtualInput
-// {
-// 	public virtual string ReadLine()
-// 	{
-// 		return Console.ReadLine();
-// 	}
-// }

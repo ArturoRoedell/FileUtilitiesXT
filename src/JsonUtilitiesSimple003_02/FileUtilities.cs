@@ -70,10 +70,11 @@ public class FileUtilitiesXT
 		{
 			FileDataList = JsonSerializer.Deserialize<List<T>>(fileContent);
 		}
-		catch (Exception e)
-		{
-			Console.WriteLine("Not A json file");
-		}
+		catch{}// Removed catch content incase it interferes with the current program
+		// catch (Exception e)
+		// {
+		// 	Console.WriteLine("Not A json file");
+		// }
 		return FileDataList;
 	}//TestExixsts
 

@@ -8,6 +8,24 @@
         <Company>Arturo Roedell</Company>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <FileVersion>1.0.0.0</FileVersion>
+        <PackageId>ArturoRoedell.Util.FileUtilitiesXT</PackageId>
+        <Title>FileUtilitiesXT</Title>
+        <Authors>Arturo Roedll</Authors>
+        <Description>Read write Json files and text files with less code</Description>
+        <IsPackable>true</IsPackable>
+        <RepositoryUrl>https://github.com/ArturoRoedell/JsonUtilitiesSimple003</RepositoryUrl>
+        <PackageTags>json, file, utility, textfile</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
 
 </Project>

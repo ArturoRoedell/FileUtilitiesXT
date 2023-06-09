@@ -56,11 +56,12 @@ class DiceGame
 	Random rand = new Random(Guid.NewGuid().GetHashCode());
 	public int Begin()
 	{
+		Console.Clear();
 		int score = 0;
-		Console.WriteLine("\n### Three One-Hundred sided dice Game ###\n");
 		bool roll = true;
 		while (roll)
 		{
+			Console.WriteLine("\n### Three One-Hundred sided dice Game ###\n");
 			int scoreOne = rand.Next(101);
 			int scoreTwo = rand.Next(101);
 			int scoreThree = rand.Next(101);
