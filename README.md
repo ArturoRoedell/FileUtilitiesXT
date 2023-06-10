@@ -74,5 +74,7 @@ Example
 Exapmple
 `bool passed = Comparison.FileCompare(ExpectedFilepath, ActualFilepath);`
 
+> ### Nuget Package also available version 1.0.0 in nuget packet manger search for: FileUtilitiesXT
+
 Link to this repository on github:
 https://github.com/ArturoRoedell/JsonUtilitiesSimple003/tree/FileUtilitiesXT.LibraryV1.0.0.1
