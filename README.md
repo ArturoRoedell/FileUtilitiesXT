@@ -74,3 +74,5 @@ Example
 Exapmple
 `bool passed = Comparison.FileCompare(ExpectedFilepath, ActualFilepath);`
 
+Link to this repository on github:
+https://github.com/ArturoRoedell/JsonUtilitiesSimple003/tree/FileUtilitiesXT.LibraryV1.0.0.1
