@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using static FileUtilitiesXT.Types;
-using static OnScreen;
+using static DiceGame.OnScreen;
 using LittleHelpersLibrary;
+
+namespace DiceGame;
 
 class Start
 {
-	public static void Main()
+	public static void DiceStart()
 	{
 		//Setup
 		CustomJsonFile<NameAndScoreSet> myJsonFile = new CustomJsonFile<NameAndScoreSet>();
@@ -15,28 +17,15 @@ class Start
 		myJsonFile.FileName = "Dice Game Scores";
 		myJsonFile.DirPath = Directory.GetCurrentDirectory() + @"\HighScoresFolder";
 		fileUtilitiesXt.LoadFileToListThenSortAndCap(myJsonFile, x => x.Score);// Key Feature for DLL
-		
-		bool simple = selectionTools.YesNoSelection("\n\nDo You Want to enter numbers quickly. Press N to play dice game?");
-		
 		bool play = true;
 		while (play) // Main Loop
 		{
 			int score;
-			//bool simple = selectionTools.YesNoSelection("\n\nDo You Want to enter numbers quickly. Press N to play dice game?");
-			if (simple)
-			{
-				SimpleGame simpleGame = new SimpleGame();
-				score = simpleGame.Begin();
-			}
-			else
-			{
-				DiceGame diceGame = new DiceGame();
-				score = diceGame.Begin(); // KeyFeature ;Starts Game Then Returns Score from Game
-			}
-			
+			DiceGame diceGame = new DiceGame();
+			score = diceGame.Begin(); // KeyFeature ;Starts Game Then Returns Score from Game
 			myJsonFile.ListData = SudoGUI_HighScore(myJsonFile.ListData, score); //Key Feature
 			fileUtilitiesXt.CreateFileSortWriteToJson(myJsonFile, x => x.Score); // Key Feature for DLL
-			play = selectionTools.YesNoSelection("\n\nDo You Want To Continue Playing?");
+			play = selectionTools.YesNoSelection("\nDo You Want To Continue Playing?");
 		}
 		
 		bool clearHighScores = selectionTools.YesNoSelection("Do You Want To Clear High Scores?");
@@ -77,19 +66,9 @@ class DiceGame
 	}
 }
 
-class SimpleGame
-{
-	public int Begin()
-	{
-		Console.WriteLine("Enter a score below: ");
-		int score = Convert.ToInt32(Console.ReadLine());
-		return score;
-	}
-}
-
 class OnScreen
 {
-	public static List<NameAndScoreSet> SudoGUI_HighScore(List<NameAndScoreSet> HighScoreList, int score)
+	public static List<NameAndScoreSet>SudoGUI_HighScore(List<NameAndScoreSet> HighScoreList, int score)
 	{
 		Console.WriteLine("Your Score: " + score);
 		Console.Write("\nEnter Player Name: ");
@@ -103,7 +82,8 @@ class OnScreen
 		for (int i = 0; i < 7; i++)
 		{
 			name = HighScoreList[i].Name;
-			Console.WriteLine($"#{i+1}: {name} \nScore:  {HighScoreList[i].Score} \n");
+			//Console.WriteLine($"#{i+1}: {name} \nScore:  {HighScoreList[i].Score} \n");
+			Console.WriteLine($"#{i+1}: {name} Score:  {HighScoreList[i].Score} ");
 			if (i+1 >= HighScoreList.Count)
 			{
 				break;

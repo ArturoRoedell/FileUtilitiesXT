@@ -8,13 +8,13 @@
         <Company>Arturo Roedell</Company>
         <AssemblyVersion>1.0.0.1</AssemblyVersion>
         <FileVersion>1.0.0.1</FileVersion>
-        <PackageId>ArturoRoedell.Util.FileUtilitiesXT</PackageId>
+        <PackageId>Orosaki.Util.FileUtilitiesXT</PackageId>
         <Title>FileUtilitiesXT</Title>
         <Authors>Arturo Roedll</Authors>
         <Description>Read write Json files and text files with less code</Description>
         <IsPackable>true</IsPackable>
         <RepositoryUrl>https://github.com/ArturoRoedell/JsonUtilitiesSimple003</RepositoryUrl>
-        <PackageTags>json, file, utility, textfile</PackageTags>
+        <PackageTags>write, read, json, file, utility, textfile</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

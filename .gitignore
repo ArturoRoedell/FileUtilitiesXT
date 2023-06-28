@@ -11,3 +11,5 @@ src/JsonUtilitiesSimple003.Tests/TestCreationFile/
 JsonUtilitiesSimple003.sln.DotSettings.user
 src/DemoJsonUtilitiesSimple/obj/
 src/DemoJsonUtilitiesSimple/bin/
+src/DemoJUS/obj/
+src/DemoJUS/bin/

@@ -13,21 +13,6 @@ using LittleHelpersLibrary;
 using static FileUtilitiesXT.Types;
 using static FileUtilitiesXT;
 
-/* TASKS:
-MAINTASKONGOING: PIPEDREAM: Continue with TDD, Test Driven Development, philosphy of having all Tests pass before adding more Fetures
-MAINTASK: Finish adding Unit Tests ...(Inprogress)...
-TODO - PIPEDREAM: Add feature to change csv file to json file if Value names are given. example SCORE, NAME...
-todo - ...Or tke Form Header information.
-TODO - PIPEDREAM: add a fancy input system with that asks you questions which can be used for any program
-TODO - PIPEDREAM: Create a Demo Project to go along with Dll called JsonUtilities003Demo
-*/
-
-/*NOTES ON USAGE:
-// It is convenient serialize from a list before you write to json file to avoid the issues with 
-// json comma separations and bracket begining and ending. In short dont use file append. Read file, deserialize, then
-// add data to list then, serialize, write file. 
-*/
-
 public class FileUtilitiesXT
 {
 	const string  defaultfileName = "DefaultSaveFile.sav";
@@ -70,11 +55,8 @@ public class FileUtilitiesXT
 		{
 			FileDataList = JsonSerializer.Deserialize<List<T>>(fileContent);
 		}
-		catch{}// Removed catch content incase it interferes with the current program
-		// catch (Exception e)
-		// {
-		// 	Console.WriteLine("Not A json file");
-		// }
+		catch{}
+
 		return FileDataList;
 	}//TestExixsts
 

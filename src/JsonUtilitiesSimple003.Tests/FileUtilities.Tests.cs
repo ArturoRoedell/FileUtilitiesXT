@@ -58,9 +58,9 @@ public class FileUtilitiesBasicTest
 
 	public FileUtilitiesBasicTest(ITestOutputHelper output)
 	{
-		this.output = output;//Bp: This Line Lets me output to the unit test window to debug the the test
+		this.output = output; //Bp: This Line Lets me output to the unit test window to debug the the test
 	}
-	
+
 	[Fact]
 	public void Should_ConcatPathFileNameAndSuffix()
 	{
@@ -69,10 +69,10 @@ public class FileUtilitiesBasicTest
 		string path = @"C:\MyFolder";
 		string filename = "HighSocres";
 		string expected = @"C:\MyFolder\HighSocres.json";
-		
+
 		//Act
 		string actual = fileUtilitiesXt.ConcatPathFileNameAndSuffix(path, filename, ".json");
-		
+
 		//Assert
 		Xunit.Assert.Equal(expected, actual);
 		bool passed = expected == actual;
@@ -85,17 +85,17 @@ public class FileUtilitiesBasicTest
 		//Arrange
 		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		string FilePath =
-			@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003.Tests\" + 
+			@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\src\JsonUtilitiesSimple003.Tests\" +
 			@"TestCreationFile\UnicornSecrets.txt";
 		File.Delete(FilePath);
-		
+
 		//Act
 		fileUtilitiesXt.CheckIfFileExistsThenCreateIt(FilePath);
-		
+
 		//Assert
 		Xunit.Assert.True(File.Exists(FilePath));
 	}
-	
+
 	[Fact]
 	public void Should_DeserializeJsonStringReturnList()
 	{
@@ -105,7 +105,7 @@ public class FileUtilitiesBasicTest
 		expected.Add(new NameScoreDifficulty("Arty", 481, _difficulty.Easy));
 		expected.Add(new NameScoreDifficulty("Jessica", 3454, _difficulty.Medium));
 		string JsonRawData =
-@"[
+			@"[
   {
     ""Name"": ""Arty"",
     ""Score"": 481,
@@ -118,24 +118,30 @@ public class FileUtilitiesBasicTest
   }
 ]
 ";
-		
+
 		//Act
 		List<NameScoreDifficulty> actual = fileUtilitiesXt.DeserializeJsonStringReturnList<NameScoreDifficulty>(JsonRawData);
-		
+
 		//Assert
 		bool passed = true;
 		for (int i = 0; i < actual.Count; i++)
 		{
 			if (!(actual[i].Name == expected[i].Name))
-			{ passed = false;}
+			{
+				passed = false;
+			}
 			if (!(actual[i].Score == expected[i].Score))
-			{ passed = false;}
+			{
+				passed = false;
+			}
 			if (!(actual[i].Difficulty == expected[i].Difficulty))
-			{ passed = false;}
+			{
+				passed = false;
+			}
 		}
 		Xunit.Assert.True(passed);
 	}
-	
+
 	[Fact]
 	public void Should_SerializeJsonDataReturnString()
 	{
@@ -161,9 +167,9 @@ public class FileUtilitiesBasicTest
 ";
 		//Act
 		string actualJsonData = fileUtilitiesXt.SerializeJsonDataReturnString(listData);
-		
+
 		//Assert
-		Xunit.Assert.Matches(expectedJsonData,actualJsonData);
+		Xunit.Assert.Matches(expectedJsonData, actualJsonData);
 	}
 
 	[Fact]
@@ -174,7 +180,7 @@ public class FileUtilitiesBasicTest
 		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
-		string expected = 
+		string expected =
 			@"[
   {
     ""Difficulty"": 1,
@@ -197,20 +203,20 @@ public class FileUtilitiesBasicTest
     ""Score"": 462
   }
 ]" + "\n";
-		
+
 		//Act
 		fileUtilitiesXt.CreateFileSortWriteToJson<NameScoreDifficulty>(myJsonFile, x => x.Score);
 		string actual = fileUtilitiesXt.ReadFromFile(myJsonFile.PathFileNameAndSuffix);
 
 		//Assert
-		
+
 		output.WriteLine("Start Actual:\n" + actual);
 		output.WriteLine("Start Expected:\n" + expected);
-		
+
 		bool passed = expected == actual;
 		output.WriteLine("Should_CreateFileSortWriteToJson passed:" + passed.ToString());
 
-		Xunit.Assert.Equal(expected,actual);
+		Xunit.Assert.Equal(expected, actual);
 	}
 
 	[Fact]
@@ -221,7 +227,7 @@ public class FileUtilitiesBasicTest
 		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
-		string testDirectory = Directory.GetCurrentDirectory() + @"\" +"LoadFileToListThenSortAndCapTest";
+		string testDirectory = Directory.GetCurrentDirectory() + @"\" + "LoadFileToListThenSortAndCapTest";
 		string fileName = "Should_LoadFileToListThenSortAndCapTestFile";
 		myJsonFile.FileName = fileName;
 		myJsonFile.DirPath = testDirectory;
@@ -238,27 +244,33 @@ public class FileUtilitiesBasicTest
 		actual.Add(new NameScoreDifficulty("Cherry", 3454, _difficulty.Medium));
 		actual.Add(new NameScoreDifficulty("Arty", 865, _difficulty.Hard));
 		actual.Add(new NameScoreDifficulty("Arty", 481, _difficulty.Easy));
-		
+
 		//Act
 		myJsonFile.ListData.Clear();
-		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameScoreDifficulty>(myJsonFile, x => x.Score, 3 );
-		
+		fileUtilitiesXt.LoadFileToListThenSortAndCap<NameScoreDifficulty>(myJsonFile, x => x.Score, 3);
+
 		//Assert
 		List<NameScoreDifficulty> expected = myJsonFile.ListData;
 		bool passed = true;
 		for (int i = 0; i < actual.Count; i++)
 		{
 			if (!(actual[i].Name == expected[i].Name))
-			{ passed = false;}
+			{
+				passed = false;
+			}
 			if (!(actual[i].Score == expected[i].Score))
-			{ passed = false;}
+			{
+				passed = false;
+			}
 			if (!(actual[i].Difficulty == expected[i].Difficulty))
-			{ passed = false;}
-			
+			{
+				passed = false;
+			}
+
 		}
 		Xunit.Assert.True(passed);
 	}
-	
+
 	[Fact]
 	public void Should_SortScore()
 	{
@@ -267,21 +279,23 @@ public class FileUtilitiesBasicTest
 		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		TestData testData = new TestData();
 		myJsonFile = testData.SetDataJsonFile();
-		
+
 		//Act
-		fileUtilitiesXt.SortScore<NameScoreDifficulty>(myJsonFile,x => x.Score);
+		fileUtilitiesXt.SortScore<NameScoreDifficulty>(myJsonFile, x => x.Score);
 		List<NameScoreDifficulty> actual = new List<NameScoreDifficulty>();
 		actual.Add(new NameScoreDifficulty("Cherry", 3454, _difficulty.Medium));
 		actual.Add(new NameScoreDifficulty("Arty", 865, _difficulty.Hard));
 		actual.Add(new NameScoreDifficulty("Arty", 481, _difficulty.Easy));
 		List<NameScoreDifficulty> expected = myJsonFile.ListData;
-		
+
 		//Assert
 		bool passed = true;
 		for (int i = 0; i < actual.Count; i++)
 		{
 			if (!(actual[i].Score == expected[i].Score))
-			{ passed = false;}
+			{
+				passed = false;
+			}
 		}
 		Xunit.Assert.True(passed);
 	}
@@ -310,7 +324,7 @@ public class FileUtilitiesBasicTest
 	{
 		//Arrange
 		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
-		
+
 		string original = "1 2 3 4 ", appendThis = "5 6";
 		string ActualFilepath = Directory.GetCurrentDirectory() + "\\TestAppendtoFileActual.txt";
 		File.Delete(ActualFilepath);
@@ -319,48 +333,30 @@ public class FileUtilitiesBasicTest
 		string expected = "1 2 3 4 5 6";
 		string ExpectedFilepath = Directory.GetCurrentDirectory() + "\\TestAppendtoFileExpected.txt";
 		fileUtilitiesXt.FastCreateWriteFile(expected, ExpectedFilepath);
-		
+
 		//Act
 		fileUtilitiesXt.AppendToFile(ActualFilepath, appendThis);
-		
+
 		//Assert
 		bool passed = LittleHelpersLibrary.Comparison.FileCompare(ExpectedFilepath, ActualFilepath);
 		Assert.True(passed);
 	}
-
+	
 	[Fact]
-	public void WIP_Should_ReadFromFile()
+	public void Should_FastCreateWriteFile()
 	{
 		//Arrange
+		FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();  // Key Feature
 
+		string expectedContent = "I am  a string serving as content for an example";
+		
 		//Act
+		fileUtilitiesXt.FastCreateWriteFile(expectedContent);
 
 		//Assert
-
-		Assert.True(false);
+		string actualContent = fileUtilitiesXt.FastReadFile();
+		Assert.Equal(expectedContent,actualContent);
 	}
-
-	[Fact]
-	public void WIP_Should_AppendToAndRetunList()
-	{
-		//Arrange
-
-		//Act
-
-		//Assert
-
-		Assert.True(false);
-	}
-
-	[Fact]
-	public void WIP_Should_PromptForRelativeDirectory()
-	{
-		//Arrange
-
-		//Act
-
-		//Assert
-
-		Assert.True(false);
-	}
+	
+	
 }

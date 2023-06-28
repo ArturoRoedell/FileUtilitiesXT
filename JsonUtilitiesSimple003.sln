@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{372FCFB7-E41C-4BB5-8239-1939ADECA344}"
+	ProjectSection(SolutionItems) = preProject
+		src\Tasks.txt = src\Tasks.txt
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonUtilitiesSimple003.Tests", "src\JsonUtilitiesSimple003.Tests\JsonUtilitiesSimple003.Tests.csproj", "{6A8C8427-3C43-4990-B417-D4CD1B7714A7}"
 EndProject
@@ -11,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugToolsForJsonUtilities"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonUtilitiesSimple003_02", "src\JsonUtilitiesSimple003_02\JsonUtilitiesSimple003_02.csproj", "{2AF2686B-C0B2-4870-9903-B2742EFA9F46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoJsonUtilitiesSimple", "src\DemoJsonUtilitiesSimple\DemoJsonUtilitiesSimple.csproj", "{E02C3807-C4C7-4D1A-B455-91FCBEB28837}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoJUS", "src\DemoJUS\DemoJUS.csproj", "{E02C3807-C4C7-4D1A-B455-91FCBEB28837}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
