@@ -1,4 +1,4 @@
-namespace LittleHelpersLibrary;
+namespace FileUtilitiesXTUtil.LittleHelpersLibrary;
 	
 public class  selectionTools
 {

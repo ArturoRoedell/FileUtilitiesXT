@@ -9,15 +9,17 @@ using System.Net.Mime;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using LittleHelpersLibrary;
-using static FileUtilitiesXT.Types;
-using static FileUtilitiesXT;
+using FileUtilitiesXTUtil.LittleHelpersLibrary;
+using static FileUtilitiesXTUtil.FileUtilitiesXT.Types;
+using static FileUtilitiesXTUtil.FileUtilitiesXT;
+
+namespace FileUtilitiesXTUtil;
 
 public class FileUtilitiesXT
 {
 	const string  defaultfileName = "DefaultSaveFile.sav";
 
-	public  void LoadFileToListThenSortAndCap<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
+	public  void LoadFileToListThenSortAndCap<T>(Types.CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 	{
 		TestPathAndCreateFolder(myJsonFile.DirPath);
 		CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
@@ -33,13 +35,13 @@ public class FileUtilitiesXT
 		ErraseOverflow<T>(myJsonFile.ListData, capLimit);
 	}//TestExixsts
 
-	public  void SortScore<T>(CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
+	public  void SortScore<T>(Types.CustomJsonFile<T> myJsonFile,Func<T, IComparable> getProp )
 	{
 		List<T> transferList =  new List<T>(myJsonFile.ListData.OrderByDescending(set => getProp(set)));
 		myJsonFile.ListData = transferList;
 	}//TestExixsts
 
-	public  void CreateFileSortWriteToJson<T>(CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
+	public  void CreateFileSortWriteToJson<T>(Types.CustomJsonFile<T> myJsonFile, Func<T, IComparable> getProp, int capLimit = 500)
 	{
 		TestPathAndCreateFolder(myJsonFile.DirPath);
 		CheckIfFileExistsThenCreateIt(myJsonFile.PathFileNameAndSuffix);
@@ -99,7 +101,7 @@ public class FileUtilitiesXT
 
 	public  void CreateFile(string filePath, string name)
 	{
-		string fullpathAndName = ConcatPathFileNameAndSuffix(filePath, name, Suffix.json);
+		string fullpathAndName = ConcatPathFileNameAndSuffix(filePath, name, Types.Suffix.json);
 		FileStream fileStream = File.Create(fullpathAndName);
 		fileStream.Close();
 	}

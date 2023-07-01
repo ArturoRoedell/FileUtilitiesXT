@@ -1,8 +1,9 @@
 ﻿ using System;
  using System.IO;
  using System.Reflection;
- using static FileUtilitiesXT.Types;
- using static FileUtilitiesXT;
+ using FileUtilitiesXTUtil;
+ using static FileUtilitiesXTUtil.FileUtilitiesXT.Types;
+ using static FileUtilitiesXTUtil.FileUtilitiesXT;
 
 /*NOTES: Scratch code when debuging
  Nothing should be referencing this area of the project.

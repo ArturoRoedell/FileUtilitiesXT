@@ -1,6 +1,7 @@
 ﻿using System;
-using static FileUtilitiesXT.Types;
-using static FileUtilitiesXT;
+using static FileUtilitiesXTUtil.FileUtilitiesXT.Types;
+using static FileUtilitiesXTUtil.FileUtilitiesXT;
+using FileUtilitiesXTUtil;
 
 /* ## MY TASKS
 * 

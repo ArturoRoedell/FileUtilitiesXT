@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using static FileUtilitiesXT.Types;
+using static FileUtilitiesXTUtil.FileUtilitiesXT.Types;
+using FileUtilitiesXTUtil;
 using static Demo.OnScreen;
-using LittleHelpersLibrary;
+using FileUtilitiesXTUtil.LittleHelpersLibrary;
 
 namespace Demo;
 

@@ -1,6 +1,7 @@
+using FileUtilitiesXTUtil;
 using Xunit.Abstractions;
 using Xunit;
-using static FileUtilitiesXT.Types;
+using static FileUtilitiesXTUtil.FileUtilitiesXT.Types;
 
 namespace JsonUtilitiesSimple003.Tests;
 
@@ -338,7 +339,7 @@ public class FileUtilitiesBasicTest
 		fileUtilitiesXt.AppendToFile(ActualFilepath, appendThis);
 
 		//Assert
-		bool passed = LittleHelpersLibrary.Comparison.FileCompare(ExpectedFilepath, ActualFilepath);
+		bool passed = FileUtilitiesXTUtil.LittleHelpersLibrary.Comparison.FileCompare(ExpectedFilepath, ActualFilepath);
 		Assert.True(passed);
 	}
 	

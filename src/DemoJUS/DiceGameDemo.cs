@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using static FileUtilitiesXT.Types;
+using static FileUtilitiesXTUtil.FileUtilitiesXT.Types;
 using static DiceGame.OnScreen;
-using LittleHelpersLibrary;
+using FileUtilitiesXTUtil.LittleHelpersLibrary;
+using FileUtilitiesXTUtil;
 
 namespace DiceGame;
 
