@@ -13,13 +13,14 @@
         <Authors>Arturo Roedll</Authors>
         <Description>Read write Json files and text files with less code</Description>
         <IsPackable>true</IsPackable>
-        <RepositoryUrl>https://github.com/ArturoRoedell/JsonUtilitiesSimple003</RepositoryUrl>
+        <RepositoryUrl>https://github.com/ArturoRoedell/FileUtilitiesXT</RepositoryUrl>
         <PackageTags>write, read, json, file, utility, textfile</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <RepositoryType>git</RepositoryType>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Version>1.0.0.1</Version>
+        <RootNamespace>FileUtilitiesXT</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

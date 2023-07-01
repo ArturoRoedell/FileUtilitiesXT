@@ -5,13 +5,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>DemoJsonUtilitiesSimple</RootNamespace>
+        <RootNamespace>Demo_FileUtilitiesXT</RootNamespace>
+        <AssemblyName>Demo_FileUtilitiesXT</AssemblyName>
     </PropertyGroup>
 
+    
     <ItemGroup>
-      <Reference Include="FileUtilitiesXT.LibraryV1.0.0.1">
-        <HintPath>..\JsonUtilitiesSimple003_02\bin\Debug\net6.0\FileUtilitiesXT.LibraryV1.0.0.1.dll</HintPath>
-      </Reference>
+      <ProjectReference Include="..\FileUtilitiesXT\FileUtilitiesXT.csproj" />
     </ItemGroup>
 
 </Project>

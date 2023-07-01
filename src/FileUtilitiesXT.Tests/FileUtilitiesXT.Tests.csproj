@@ -7,6 +7,8 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <AssemblyName>FileUtilitiesXT.Tests</AssemblyName>
+    <RootNamespace>FileUtilitiesXT.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,9 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="FileUtilitiesXT.Library">
-      <HintPath>..\JsonUtilitiesSimple003_02\bin\Debug\net6.0\FileUtilitiesXT.LibraryV1.0.0.1.dll</HintPath>
+    <Reference Include="FileUtilitiesXT.LibraryV1.0.0.1">
+      <HintPath>..\FileUtilitiesXT\bin\Debug\net6.0\FileUtilitiesXT.LibraryV1.0.0.1.dll</HintPath>
     </Reference>
   </ItemGroup>
+  
+  
 
 </Project>

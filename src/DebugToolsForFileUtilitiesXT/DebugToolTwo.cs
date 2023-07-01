@@ -42,12 +42,12 @@ public class Bebug01
 		Console.ReadLine();
 		return;
 
-		string filepath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest002\UnicornSerects.dll";
+		string filepath = @"C:\Users\ARTURO 001\source\repos\FileUtilitiesXTTest002\UnicornSerects.dll";
 		Console.WriteLine(Path.GetDirectoryName(filepath));
 
 		return;
 		
-		//Directory.CreateDirectory(@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest002");
+		//Directory.CreateDirectory(@"C:\Users\ARTURO 001\source\repos\FileUtilitiesXTTest002");
 
 
 		List<NameAndScoreSet> HighScoreList = new List<NameAndScoreSet>();
@@ -57,7 +57,7 @@ public class Bebug01
 		AddNamesAndScoresToList("Arty", 865, HighScoreList);
 		CustomJsonFile<NameAndScoreSet> myJsonFile = new CustomJsonFile<NameAndScoreSet>();
 		myJsonFile.FileName = "artysdfsfFile";
-		myJsonFile.DirPath = @"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimpleTest001";
+		myJsonFile.DirPath = @"C:\Users\ARTURO 001\source\repos\FileUtilitiesXTTest001";
 		myJsonFile.ListData = HighScoreList;
 		//FileUtilitiesXT fileUtilitiesXt = new FileUtilitiesXT();
 		
@@ -115,7 +115,7 @@ public class Bebug01
 		
 		//string getthisDirectory = fileUtilitiesXt.PromptForRelativeDirectory(@"C:Pretend/Folder\\notTrue");
 		
-		//fileUtilitiesXt.TestPathAndCreateFolder(@"C:\Users\ARTURO 001\source\repos\JsonUtilitiesSimple003\AnotherTest\");
+		//fileUtilitiesXt.TestPathAndCreateFolder(@"C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\AnotherTest\");
 		return;
 	
 		
