@@ -1,7 +1,7 @@
 ![image info](./icon/FileUtilitiesXT_icon.png)
 [![NuGet](https://img.shields.io/nuget/vpre/ArturoRoedell.Util.FileUtilitiesXT.svg)](https://www.nuget.org/packages/downloader)
 
->## Read and write JSON files and text files with ease Version 1.0.0.1
+>## Read and write JSON files and text files with ease Version 1.0.0.1 Targets net6.0 & net472
 >## Simplest way to save game save, save configs, or save high scores in c# there is!
 
 ### Description
