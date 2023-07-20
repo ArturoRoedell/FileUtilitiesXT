@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUtilitiesXT", "src\File
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_FileUtilitiesXT", "src\Demo_FileUtilitiesXT\Demo_FileUtilitiesXT.csproj", "{E02C3807-C4C7-4D1A-B455-91FCBEB28837}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUtilitiesXT472.Tests", "FileUtilitiesXT472.Tests\FileUtilitiesXT472.Tests.csproj", "{B402290E-8E55-453B-9F24-DA06818BA756}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{E02C3807-C4C7-4D1A-B455-91FCBEB28837}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E02C3807-C4C7-4D1A-B455-91FCBEB28837}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E02C3807-C4C7-4D1A-B455-91FCBEB28837}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B402290E-8E55-453B-9F24-DA06818BA756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B402290E-8E55-453B-9F24-DA06818BA756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B402290E-8E55-453B-9F24-DA06818BA756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B402290E-8E55-453B-9F24-DA06818BA756}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6A8C8427-3C43-4990-B417-D4CD1B7714A7} = {372FCFB7-E41C-4BB5-8239-1939ADECA344}

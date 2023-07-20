@@ -11,3 +11,10 @@ src/FileUtilitiesXT/bin/
 src/FileUtilitiesXT/obj/
 src/FileUtilitiesXT.Tests/TestCreationFile/UnicornSecrets.txt
 FileUtilitiesXT.sln.DotSettings.user
+packages/
+FileUtilitiesXT472.Tests/bin/
+FileUtilitiesXT472.Tests/obj/
+FileUtilitiesXT472.Tests/Properties/AssemblyInfo.cs
+FileUtilitiesXT472.Tests/packages.config
+FileUtilitiesXT472.Tests/App.config
+FileUtilitiesXT472.Tests/App.config
