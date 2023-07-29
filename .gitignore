@@ -7,7 +7,10 @@ src/Demo_FileUtilitiesXT/bin/
 src/Demo_FileUtilitiesXT/obj/
 src/FileUtilitiesXT.Tests/bin/
 src/FileUtilitiesXT.Tests/obj/
-src/FileUtilitiesXT/bin/
+Demo472/bin/Debug/
+Demo472/obj/Debug/
+src/FileUtilitiesXT/bin/Debug/net6.0
+src/FileUtilitiesXT/bin/Debug/net472
 src/FileUtilitiesXT/obj/
 src/FileUtilitiesXT.Tests/TestCreationFile/UnicornSecrets.txt
 FileUtilitiesXT.sln.DotSettings.user
@@ -18,3 +21,7 @@ FileUtilitiesXT472.Tests/Properties/AssemblyInfo.cs
 FileUtilitiesXT472.Tests/packages.config
 FileUtilitiesXT472.Tests/App.config
 FileUtilitiesXT472.Tests/App.config
+
+Demo472/bin/Debug/FileUtilitiesXT.LibraryV1.0.0.1.dll
+Demo472/bin/Debug/Demo472.pdb
+Demo472/obj/Debug/Demo472.exe
