@@ -1,0 +1,10 @@
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\bin\Debug\Demo472.exe
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\bin\Debug\Demo472.pdb
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\bin\Debug\FileUtilitiesXT.LibraryV1.0.0.1.dll
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\bin\Debug\FileUtilitiesXT.LibraryV1.0.0.1.pdb
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\obj\Debug\Demo472.csproj.AssemblyReference.cache
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\obj\Debug\Demo472.csproj.CoreCompileInputs.cache
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\obj\Debug\Demo472.csproj.CopyComplete
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\obj\Debug\Demo472.exe
+C:\Users\ARTURO 001\source\repos\FileUtilitiesXT\Demo472\obj\Debug\Demo472.pdb

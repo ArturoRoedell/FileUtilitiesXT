@@ -59,7 +59,7 @@ namespace FileUtilitiesXTUtil
 			List<T> FileDataList = new List<T>();
 			try
 			{
-				FileDataList = JsonSerializer.Deserialize<List<T>>(fileContent);
+				FileDataList = JsonConvert.DeserializeObject<List<T>>(fileContent);
 			}
 			catch
 			{
@@ -70,11 +70,7 @@ namespace FileUtilitiesXTUtil
 
 		public string SerializeJsonDataReturnString<T>(List<T> listData)
 		{
-			string jsonString = JsonSerializer.Serialize
-			(
-				listData, new JsonSerializerOptions() { WriteIndented = true }
-			);
-
+			string jsonString = JsonConvert.SerializeObject(listData, Formatting.Indented);
 			return jsonString + "\n";
 		} //TestExixsts
 

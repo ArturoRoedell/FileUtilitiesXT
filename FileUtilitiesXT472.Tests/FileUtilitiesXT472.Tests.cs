@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using Xunit;
 using System.Threading;
-//using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
+using System.Text.RegularExpressions;
 using static FileUtilitiesXTUtil.FileUtilitiesXT.Types;
 
 namespace FileUtilitiesXT472.Tests
@@ -175,7 +175,20 @@ namespace FileUtilitiesXT472.Tests
 			string actualJsonData = fileUtilitiesXt.SerializeJsonDataReturnString(listData);
 
 			//Assert
-			Xunit.Assert.Matches(expectedJsonData, actualJsonData);
+			bool Isequal;
+			if (expectedJsonData == actualJsonData)
+			{
+				Isequal = true;
+			}
+			else
+			{
+				Isequal = false;
+			}
+			
+			
+			//Xunit.Assert.Matches(expectedJsonData, actualJsonData);
+			//Xunit.Assert.Matches(expectedJsonData, actualJsonData);
+			Xunit.Assert.True(Isequal);
 		}
 
 		[Fact]
